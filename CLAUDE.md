@@ -1,6 +1,12 @@
 # TP Grupal — Laboratorio de Métodos Cuantitativos (FCE UBA, 2C 2026)
 
-Repo del grupo para el trabajo práctico integrador grupal de la materia "Laboratorio de Métodos Cuantitativos Aplicados a la Gestión". Tema elegido: **fútbol** (dataset a definir — fuentes sugeridas: FBref, SofaScore).
+Repo del grupo para el trabajo práctico integrador grupal de la materia "Laboratorio de Métodos Cuantitativos Aplicados a la Gestión". Tema elegido: **fútbol**.
+
+**Pregunta de investigación (ya definida):** ¿Qué peso y qué rentabilidad tienen las ventas de jugadores formados en inferiores frente a las de jugadores comprados?
+
+**Dataset:** Transfermarkt (tablas `transfers`, `players`, `clubs`, `competitions`), descargado en `datos/raw/` — ver [`datos/raw/README.md`](datos/raw/README.md) para el detalle de columnas y la regla propuesta para clasificar "cantera" vs "comprado" a partir de los nombres de equipos juveniles/reserva en `from_club_name`.
+
+Falta: acotar el análisis a un club o puñado de clubes/ligas (todo Transfermarkt es demasiado amplio).
 
 Repo de la cátedra (solo lectura, ahí está la consigna completa en PDF): https://github.com/Datso653/Laboratorio-de-metodos-Cuantitativos-Aplicados-a-la-gestion — `Integradoras/TP_Grupal/tp_grupal_2C_2026.pdf`
 

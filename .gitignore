@@ -5,3 +5,6 @@ __pycache__/
 venv/
 .DS_Store
 Thumbs.db
+
+# Datasets crudos descomprimidos (reproducibles desde los .csv.gz versionados)
+datos/raw/*.csv
