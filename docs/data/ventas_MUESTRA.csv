@@ -1,0 +1,124 @@
+jugador,club_vendedor,club_comprador,liga,temporada_venta,grupo,fee_venta,fee_compra,anios_en_club,edad_venta
+Jugador Muestra 001,Club Muestra ARG,Comprador Muestra 8,Liga Argentina,2012,cantera,3.9,0,5,23
+Jugador Muestra 002,Club Muestra ARG,Comprador Muestra 18,Liga Argentina,2018,cantera,8.9,0,7.1,26
+Jugador Muestra 003,Club Muestra ARG,Comprador Muestra 19,Liga Argentina,2023,comprado,4,1,3.5,25
+Jugador Muestra 004,Club Muestra ARG,Comprador Muestra 19,Liga Argentina,2022,cantera,4,0,4.9,20
+Jugador Muestra 005,Club Muestra ARG,Comprador Muestra 17,Liga Argentina,2022,comprado,2.6,0.9,2.8,26
+Jugador Muestra 006,Club Muestra ARG,Comprador Muestra 15,Liga Argentina,2021,cantera,6.3,0,5.1,30
+Jugador Muestra 007,Club Muestra ARG,Comprador Muestra 9,Liga Argentina,2013,cantera,1.9,0,1.7,27
+Jugador Muestra 008,Club Muestra ARG,Comprador Muestra 1,Liga Argentina,2015,comprado,5.8,2.8,4.5,22
+Jugador Muestra 009,Club Muestra ARG,Comprador Muestra 7,Liga Argentina,2016,comprado,9.1,1.7,5.3,19
+Jugador Muestra 010,Club Muestra ARG,Comprador Muestra 15,Liga Argentina,2015,comprado,10.3,6,1,19
+Jugador Muestra 011,Club Muestra ARG,Comprador Muestra 10,Liga Argentina,2014,comprado,5.9,2,1.1,20
+Jugador Muestra 012,Club Muestra ARG,Comprador Muestra 9,Liga Argentina,2013,comprado,13,5.4,4.9,19
+Jugador Muestra 013,Club Muestra ARG,Comprador Muestra 9,Liga Argentina,2012,comprado,11.9,6.4,3.8,19
+Jugador Muestra 014,Club Muestra ARG,Comprador Muestra 6,Liga Argentina,2018,comprado,8.6,5.3,5.4,28
+Jugador Muestra 015,Club Muestra ARG,Comprador Muestra 9,Liga Argentina,2012,comprado,5.4,2.4,1.5,26
+Jugador Muestra 016,Club Muestra ARG,Comprador Muestra 12,Liga Argentina,2021,cantera,3.6,0,4.3,25
+Jugador Muestra 017,Club Muestra ARG,Comprador Muestra 5,Liga Argentina,2023,comprado,6.8,2.8,1.7,30
+Jugador Muestra 018,Club Muestra ARG,Comprador Muestra 11,Liga Argentina,2024,comprado,4.8,0.7,5.1,30
+Jugador Muestra 019,Club Muestra ARG,Comprador Muestra 1,Liga Argentina,2016,comprado,8.1,2.4,4.6,23
+Jugador Muestra 020,Club Muestra ARG,Comprador Muestra 13,Liga Argentina,2020,comprado,6.4,0.7,5.4,24
+Jugador Muestra 021,Club Muestra ARG,Comprador Muestra 1,Liga Argentina,2022,cantera,5.8,0,6,27
+Jugador Muestra 022,Club Muestra ARG,Comprador Muestra 13,Liga Argentina,2022,comprado,12.4,3.7,4.2,18
+Jugador Muestra 023,Club Muestra ARG,Comprador Muestra 19,Liga Argentina,2017,comprado,7,2,3.6,22
+Jugador Muestra 024,Club Muestra ARG,Comprador Muestra 2,Liga Argentina,2013,comprado,4.7,0.7,3.4,19
+Jugador Muestra 025,Club Muestra ESP,Comprador Muestra 20,LaLiga,2020,cantera,21.3,0,4.9,25
+Jugador Muestra 026,Club Muestra ESP,Comprador Muestra 19,LaLiga,2023,cantera,20.4,0,5.9,25
+Jugador Muestra 027,Club Muestra ESP,Comprador Muestra 5,LaLiga,2013,comprado,29,17.8,4.2,22
+Jugador Muestra 028,Club Muestra ESP,Comprador Muestra 17,LaLiga,2015,cantera,29.7,0,6.4,27
+Jugador Muestra 029,Club Muestra ESP,Comprador Muestra 11,LaLiga,2021,cantera,24.5,0,3.5,26
+Jugador Muestra 030,Club Muestra ESP,Comprador Muestra 16,LaLiga,2023,cantera,37.1,0,6.6,20
+Jugador Muestra 031,Club Muestra ESP,Comprador Muestra 2,LaLiga,2022,comprado,27.3,20.6,3.1,20
+Jugador Muestra 032,Club Muestra ESP,Comprador Muestra 13,LaLiga,2013,cantera,33.6,0,7.8,24
+Jugador Muestra 033,Club Muestra ESP,Comprador Muestra 20,LaLiga,2021,comprado,23.2,6,5.1,19
+Jugador Muestra 034,Club Muestra ESP,Comprador Muestra 18,LaLiga,2023,cantera,34.9,0,6.5,19
+Jugador Muestra 035,Club Muestra ESP,Comprador Muestra 16,LaLiga,2021,comprado,49.7,18.6,5.2,23
+Jugador Muestra 036,Club Muestra ESP,Comprador Muestra 4,LaLiga,2017,comprado,29.4,15.4,1.7,19
+Jugador Muestra 037,Club Muestra ESP,Comprador Muestra 17,LaLiga,2024,comprado,20,8.2,3.9,23
+Jugador Muestra 038,Club Muestra ESP,Comprador Muestra 17,LaLiga,2015,cantera,6.9,0,1.9,23
+Jugador Muestra 039,Club Muestra ESP,Comprador Muestra 20,LaLiga,2021,comprado,28.7,21.2,2.3,18
+Jugador Muestra 040,Club Muestra ESP,Comprador Muestra 17,LaLiga,2018,comprado,24.4,10.3,1.4,18
+Jugador Muestra 041,Club Muestra ESP,Comprador Muestra 2,LaLiga,2021,comprado,37.2,25.8,2.7,21
+Jugador Muestra 042,Club Muestra ESP,Comprador Muestra 2,LaLiga,2022,cantera,32.3,0,7,20
+Jugador Muestra 043,Club Muestra ESP,Comprador Muestra 8,LaLiga,2024,cantera,18.9,0,6.2,27
+Jugador Muestra 044,Club Muestra ESP,Comprador Muestra 4,LaLiga,2012,cantera,26.9,0,4.6,24
+Jugador Muestra 045,Club Muestra ESP,Comprador Muestra 12,LaLiga,2015,comprado,32.7,8.4,5.5,30
+Jugador Muestra 046,Club Muestra ESP,Comprador Muestra 5,LaLiga,2021,comprado,48.1,19.3,3.8,25
+Jugador Muestra 047,Club Muestra ESP,Comprador Muestra 18,LaLiga,2020,cantera,19.2,0,1.5,28
+Jugador Muestra 048,Club Muestra ESP,Comprador Muestra 3,LaLiga,2016,cantera,18,0,6.3,24
+Jugador Muestra 049,Club Muestra GER,Comprador Muestra 16,Bundesliga,2016,cantera,3.6,0,1.3,24
+Jugador Muestra 050,Club Muestra GER,Comprador Muestra 11,Bundesliga,2023,cantera,22.8,0,6.8,21
+Jugador Muestra 051,Club Muestra GER,Comprador Muestra 6,Bundesliga,2024,comprado,21.2,14.5,1.3,23
+Jugador Muestra 052,Club Muestra GER,Comprador Muestra 8,Bundesliga,2023,comprado,41.4,15.5,5.5,25
+Jugador Muestra 053,Club Muestra GER,Comprador Muestra 20,Bundesliga,2016,cantera,16.7,0,4.8,19
+Jugador Muestra 054,Club Muestra GER,Comprador Muestra 4,Bundesliga,2022,comprado,50.2,25.8,4.5,23
+Jugador Muestra 055,Club Muestra GER,Comprador Muestra 14,Bundesliga,2015,cantera,32.8,0,7.2,25
+Jugador Muestra 056,Club Muestra GER,Comprador Muestra 15,Bundesliga,2014,cantera,5.4,0,2,28
+Jugador Muestra 057,Club Muestra GER,Comprador Muestra 3,Bundesliga,2012,cantera,26.3,0,5.5,25
+Jugador Muestra 058,Club Muestra GER,Comprador Muestra 6,Bundesliga,2022,comprado,32.2,10,4.8,20
+Jugador Muestra 059,Club Muestra GER,Comprador Muestra 16,Bundesliga,2015,comprado,22.6,9.6,2,26
+Jugador Muestra 060,Club Muestra GER,Comprador Muestra 18,Bundesliga,2018,cantera,4.2,0,1.5,23
+Jugador Muestra 061,Club Muestra GER,Comprador Muestra 10,Bundesliga,2014,comprado,29.3,22.6,2.5,29
+Jugador Muestra 062,Club Muestra GER,Comprador Muestra 12,Bundesliga,2013,cantera,24.4,0,8,18
+Jugador Muestra 063,Club Muestra GER,Comprador Muestra 9,Bundesliga,2015,comprado,42.9,23.3,1.1,18
+Jugador Muestra 064,Club Muestra GER,Comprador Muestra 4,Bundesliga,2012,cantera,22.7,0,6.4,25
+Jugador Muestra 065,Club Muestra GER,Comprador Muestra 20,Bundesliga,2021,comprado,24.5,3.5,2.2,29
+Jugador Muestra 066,Club Muestra GER,Comprador Muestra 13,Bundesliga,2020,comprado,22.9,15.7,1.8,23
+Jugador Muestra 067,Club Muestra GER,Comprador Muestra 19,Bundesliga,2023,cantera,23.4,0,5.3,22
+Jugador Muestra 068,Club Muestra GER,Comprador Muestra 18,Bundesliga,2020,cantera,26.9,0,4.4,25
+Jugador Muestra 069,Club Muestra GER,Comprador Muestra 16,Bundesliga,2021,cantera,30.3,0,6.4,22
+Jugador Muestra 070,Club Muestra GER,Comprador Muestra 8,Bundesliga,2014,cantera,20.5,0,5.9,29
+Jugador Muestra 071,Club Muestra GER,Comprador Muestra 7,Bundesliga,2019,cantera,15.5,0,3.4,30
+Jugador Muestra 072,Club Muestra GER,Comprador Muestra 13,Bundesliga,2017,cantera,16,0,4.6,24
+Jugador Muestra 073,Club Muestra MEX,Comprador Muestra 4,Liga MX,2020,cantera,12.7,0,5.4,29
+Jugador Muestra 074,Club Muestra MEX,Comprador Muestra 11,Liga MX,2015,comprado,13.3,6.6,2.5,25
+Jugador Muestra 075,Club Muestra MEX,Comprador Muestra 3,Liga MX,2021,comprado,9.6,7,0.5,29
+Jugador Muestra 076,Club Muestra MEX,Comprador Muestra 19,Liga MX,2014,cantera,8,0,6.9,19
+Jugador Muestra 077,Club Muestra MEX,Comprador Muestra 3,Liga MX,2016,comprado,10.7,5.1,2.8,27
+Jugador Muestra 078,Club Muestra MEX,Comprador Muestra 13,Liga MX,2023,comprado,15.7,3.8,5.5,30
+Jugador Muestra 079,Club Muestra MEX,Comprador Muestra 10,Liga MX,2015,cantera,5.1,0,4.8,28
+Jugador Muestra 080,Club Muestra MEX,Comprador Muestra 2,Liga MX,2020,cantera,11.7,0,6.5,28
+Jugador Muestra 081,Club Muestra MEX,Comprador Muestra 11,Liga MX,2019,cantera,9.5,0,6.7,20
+Jugador Muestra 082,Club Muestra MEX,Comprador Muestra 15,Liga MX,2018,comprado,15.9,4,4.7,24
+Jugador Muestra 083,Club Muestra MEX,Comprador Muestra 4,Liga MX,2024,cantera,7.8,0,6.5,20
+Jugador Muestra 084,Club Muestra MEX,Comprador Muestra 11,Liga MX,2022,cantera,8.9,0,5.3,19
+Jugador Muestra 085,Club Muestra MEX,Comprador Muestra 12,Liga MX,2018,cantera,5.4,0,2,27
+Jugador Muestra 086,Club Muestra MEX,Comprador Muestra 8,Liga MX,2021,cantera,7.7,0,4.7,22
+Jugador Muestra 087,Club Muestra MEX,Comprador Muestra 18,Liga MX,2024,comprado,11,4.1,2.7,26
+Jugador Muestra 088,Club Muestra MEX,Comprador Muestra 6,Liga MX,2014,comprado,8.3,2.4,0.6,22
+Jugador Muestra 089,Club Muestra MEX,Comprador Muestra 4,Liga MX,2023,cantera,6.1,0,3.9,24
+Jugador Muestra 090,Club Muestra MEX,Comprador Muestra 12,Liga MX,2022,cantera,12.6,0,5.9,23
+Jugador Muestra 091,Club Muestra MEX,Comprador Muestra 11,Liga MX,2016,comprado,17.3,10.1,4,24
+Jugador Muestra 092,Club Muestra MEX,Comprador Muestra 8,Liga MX,2021,cantera,5.4,0,4.6,22
+Jugador Muestra 093,Club Muestra MEX,Comprador Muestra 13,Liga MX,2020,cantera,8.7,0,7.6,22
+Jugador Muestra 094,Club Muestra MEX,Comprador Muestra 15,Liga MX,2024,cantera,11.6,0,4.9,27
+Jugador Muestra 095,Club Muestra MEX,Comprador Muestra 6,Liga MX,2021,cantera,5.7,0,5,30
+Jugador Muestra 096,Club Muestra KSA,Comprador Muestra 17,Saudi Pro League,2015,comprado,18.8,3.8,5.1,25
+Jugador Muestra 097,Club Muestra KSA,Comprador Muestra 2,Saudi Pro League,2016,comprado,11.4,6.8,4.1,30
+Jugador Muestra 098,Club Muestra KSA,Comprador Muestra 1,Saudi Pro League,2022,comprado,20.4,9.2,5.4,27
+Jugador Muestra 099,Club Muestra KSA,Comprador Muestra 9,Saudi Pro League,2015,comprado,28.6,14.5,4.9,22
+Jugador Muestra 100,Club Muestra KSA,Comprador Muestra 15,Saudi Pro League,2012,comprado,16.3,4.3,1.9,28
+Jugador Muestra 101,Club Muestra KSA,Comprador Muestra 15,Saudi Pro League,2019,comprado,14.4,1.8,3.5,27
+Jugador Muestra 102,Club Muestra KSA,Comprador Muestra 9,Saudi Pro League,2013,comprado,16.3,2.8,4.2,19
+Jugador Muestra 103,Club Muestra KSA,Comprador Muestra 14,Saudi Pro League,2021,comprado,16.6,4.6,1.2,26
+Jugador Muestra 104,Club Muestra KSA,Comprador Muestra 3,Saudi Pro League,2015,comprado,21.3,4.1,4.4,29
+Jugador Muestra 105,Club Muestra KSA,Comprador Muestra 20,Saudi Pro League,2024,comprado,13.1,7,2.2,23
+Jugador Muestra 106,Club Muestra KSA,Comprador Muestra 3,Saudi Pro League,2020,comprado,11.6,5.4,2.4,19
+Jugador Muestra 107,Club Muestra KSA,Comprador Muestra 3,Saudi Pro League,2019,comprado,20.1,10.9,3.5,29
+Jugador Muestra 108,Club Muestra KSA,Comprador Muestra 7,Saudi Pro League,2024,comprado,17,12.7,1.2,21
+Jugador Muestra 109,Club Muestra KSA,Comprador Muestra 10,Saudi Pro League,2013,cantera,13.3,0,7.9,30
+Jugador Muestra 110,Club Muestra KSA,Comprador Muestra 8,Saudi Pro League,2019,cantera,4.2,0,1.1,18
+Jugador Muestra 111,Club Muestra KSA,Comprador Muestra 6,Saudi Pro League,2013,comprado,19.1,13.8,2,18
+Jugador Muestra 112,Club Muestra KSA,Comprador Muestra 3,Saudi Pro League,2023,comprado,23.5,14.3,1.3,28
+Jugador Muestra 113,Club Muestra KSA,Comprador Muestra 2,Saudi Pro League,2012,comprado,25.1,12,0.9,27
+Jugador Muestra 114,Club Muestra KSA,Comprador Muestra 5,Saudi Pro League,2022,comprado,11.6,4.8,4.2,25
+Jugador Muestra 115,Club Muestra KSA,Comprador Muestra 16,Saudi Pro League,2013,comprado,17,11.8,3,30
+Jugador Muestra 116,Club Muestra KSA,Comprador Muestra 9,Saudi Pro League,2018,comprado,27.5,13.6,5,24
+Jugador Muestra 117,Club Muestra KSA,Comprador Muestra 15,Saudi Pro League,2024,comprado,10.6,7.1,1.5,25
+Jugador Muestra 118,Club Muestra KSA,Comprador Muestra 9,Saudi Pro League,2021,comprado,18.2,13.3,1.1,22
+Jugador Muestra 119,Club Muestra KSA,Comprador Muestra 5,Saudi Pro League,2012,comprado,22.3,10.4,3.2,19
+Jugador Muestra 120,Club Muestra KSA,Comprador Muestra 18,Saudi Pro League,2023,comprado,19.1,8.4,1.9,18
+Jugador Muestra 121,Club Muestra KSA,Comprador Muestra 11,Saudi Pro League,2023,comprado,17.4,6.4,4.9,28
+Jugador Muestra 122,Club Muestra KSA,Comprador Muestra 11,Saudi Pro League,2019,comprado,9.8,3.3,3.7,22
+Jugador Muestra 123,Club Muestra KSA,Comprador Muestra 3,Saudi Pro League,2022,comprado,19,7.4,2.8,27

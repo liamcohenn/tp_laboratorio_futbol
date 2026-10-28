@@ -1,0 +1,266 @@
+jugador,club_vendedor,club_comprador,liga,temporada_venta,grupo,fee_venta,fee_compra,anios_en_club,edad_venta
+Dro Fernández,FC Barcelona,PSG,LaLiga (España),2026,comprado,8.200,0.000,0.3,18
+Pau Víctor,FC Barcelona,Braga,LaLiga (España),2025,comprado,12.000,5.500,1,23
+Pablo Torre,FC Barcelona,RCD Mallorca,LaLiga (España),2025,comprado,5.000,0.000,1,22
+Álex Valle,FC Barcelona,Como,LaLiga (España),2025,comprado,6.000,0.000,0,21
+Vitor Roque,FC Barcelona,Palmeiras,LaLiga (España),2025,comprado,25.500,0.000,0,19
+Mikayil Faye,FC Barcelona,Stade Rennais,LaLiga (España),2024,comprado,10.300,0.000,0.2,20
+Julián Araujo,FC Barcelona,Bournemouth,LaLiga (España),2024,comprado,10.000,0.000,0.1,22
+Chadi Riad,FC Barcelona,Real Betis,LaLiga (España),2024,comprado,9.000,0.000,0,21
+Marc Guiu,FC Barcelona,Chelsea,LaLiga (España),2024,cantera,6.000,0.000,0.5,18
+Abde Ezzalzouli,FC Barcelona,Real Betis,LaLiga (España),2023,comprado,7.500,0.000,0.2,21
+Ousmane Dembélé,FC Barcelona,PSG,LaLiga (España),2023,comprado,50.000,148.000,6,26
+Franck Kessié,FC Barcelona,Al-Ahli,LaLiga (España),2023,comprado,12.500,0.000,1.1,26
+Nico González,FC Barcelona,Porto,LaLiga (España),2023,comprado,21.200,0.000,0.1,21
+Antoine Griezmann,FC Barcelona,Atlético,LaLiga (España),2023,comprado,22.000,0.000,0,32
+Francisco Trincão,FC Barcelona,Sporting,LaLiga (España),2023,comprado,18.000,0.000,0,23
+Héctor Bellerín,FC Barcelona,Sporting,LaLiga (España),2023,comprado,1.000,0.000,0.4,27
+Memphis Depay,FC Barcelona,Atlético,LaLiga (España),2023,comprado,3.000,0.000,1.6,28
+Pierre-Emerick Aubameyang,FC Barcelona,Chelsea,LaLiga (España),2022,comprado,12.000,0.000,0.6,33
+Philippe Coutinho,FC Barcelona,Aston Villa,LaLiga (España),2022,comprado,20.000,0.000,0,30
+Emerson Royal,FC Barcelona,Real Betis,LaLiga (España),2019,comprado,6.000,12.000,0,20
+Emerson Royal,FC Barcelona,Tottenham,LaLiga (España),2021,comprado,25.000,14.000,0.2,22
+Ilaix Moriba,FC Barcelona,Leipzig,LaLiga (España),2021,cantera,16.600,0.000,0.2,18
+Monchu,FC Barcelona,Granada CF,LaLiga (España),2021,comprado,0.750,0.000,0,21
+Carles Aleñá,FC Barcelona,Getafe,LaLiga (España),2021,comprado,5.000,0.000,0,23
+Junior Firpo,FC Barcelona,Leeds,LaLiga (España),2021,comprado,15.000,20.000,1.9,24
+Jean-Clair Todibo,FC Barcelona,Nice,LaLiga (España),2021,comprado,16.500,0.000,0,21
+Nélson Semedo,FC Barcelona,Wolves,LaLiga (España),2020,comprado,32.000,35.700,3.2,26
+Arturo Vidal,FC Barcelona,Inter,LaLiga (España),2020,comprado,1.000,18.000,2.1,33
+Ivan Rakitic,FC Barcelona,Sevilla FC,LaLiga (España),2020,comprado,3.500,18.000,6.2,32
+Carles Pérez,FC Barcelona,Roma,LaLiga (España),2020,comprado,13.000,0.000,0,22
+Arthur Melo,FC Barcelona,Juventus,LaLiga (España),2020,comprado,80.600,31.000,2.1,24
+Luis Suárez,FC Barcelona,Atlético,LaLiga (España),2020,comprado,9.000,81.720,6,33
+Marc Cucurella,FC Barcelona,SD Eibar,LaLiga (España),2019,comprado,2.000,0.000,0,20
+Marc Cucurella,FC Barcelona,Getafe,LaLiga (España),2020,comprado,11.800,0.000,0,21
+Malcom,FC Barcelona,Zenit S-Pb,LaLiga (España),2019,comprado,41.500,41.000,1,22
+Sergi Palencia,FC Barcelona,Saint-Étienne,LaLiga (España),2019,comprado,2.000,0.000,0,23
+Jasper Cillessen,FC Barcelona,Valencia,LaLiga (España),2019,comprado,35.000,13.000,2.8,30
+Denis Suárez,FC Barcelona,Villarreal,LaLiga (España),2015,comprado,4.000,0.000,0,21
+Denis Suárez,FC Barcelona,Celta de Vigo,LaLiga (España),2019,comprado,12.900,0.000,0,25
+André Gomes,FC Barcelona,Everton,LaLiga (España),2019,comprado,25.000,0.000,0,25
+Marc Cardona,FC Barcelona,CA Osasuna,LaLiga (España),2019,comprado,2.500,0.000,0,23
+Munir El Haddadi,FC Barcelona,Sevilla FC,LaLiga (España),2019,comprado,1.050,0.000,0.5,23
+Marlon,FC Barcelona,Sassuolo,LaLiga (España),2018,comprado,12.000,0.000,0.1,22
+Yerry Mina,FC Barcelona,Everton,LaLiga (España),2018,comprado,30.250,12.400,0.6,23
+Lucas Digne,FC Barcelona,Everton,LaLiga (España),2018,comprado,20.200,16.500,2.1,25
+Gerard Deulofeu,FC Barcelona,Everton,LaLiga (España),2015,comprado,6.000,0.000,0,21
+Gerard Deulofeu,FC Barcelona,Watford,LaLiga (España),2018,comprado,13.000,0.000,0,24
+Neymar,FC Barcelona,PSG,LaLiga (España),2017,comprado,222.000,88.000,4.1,25
+Claudio Bravo,FC Barcelona,Man City,LaLiga (España),2016,comprado,18.000,12.000,2.2,33
+Alen Halilovic,FC Barcelona,Hamburg,LaLiga (España),2016,comprado,5.000,0.000,0.1,20
+Marc Bartra,FC Barcelona,Dortmund,LaLiga (España),2016,cantera,8.000,0.000,4,25
+Pedro,FC Barcelona,Chelsea,LaLiga (España),2015,cantera,27.000,0.000,7.6,28
+Alexis Sánchez,FC Barcelona,Arsenal,LaLiga (España),2014,comprado,42.500,26.000,3,25
+Jonathan dos Santos,FC Barcelona,Villarreal,LaLiga (España),2014,cantera,1.500,0.000,2,24
+Thiago Alcántara,FC Barcelona,Bayern Munich,LaLiga (España),2013,cantera,25.000,0.000,2,22
+Dmytro Chygrynskyi,FC Barcelona,Shakhtar D.,LaLiga (España),2010,comprado,15.000,25.000,0.8,23
+Pepe Reina,FC Barcelona,Villarreal,LaLiga (España),2002,cantera,0.750,0.000,2,19
+Raúl Moro,Ajax Amsterdam,CA Osasuna,Eredivisie (Países Bajos),2026,comprado,5.000,11.000,0.5,23
+Kenneth Taylor,Ajax Amsterdam,Lazio,Eredivisie (Países Bajos),2026,cantera,16.850,0.000,5.2,23
+Kasper Dolberg,Ajax Amsterdam,Nice,Eredivisie (Países Bajos),2019,cantera,20.500,0.000,3.2,21
+Bertrand Traoré,Ajax Amsterdam,Sunderland,Eredivisie (Países Bajos),2025,comprado,2.900,0.000,1.1,29
+Brian Brobbey,Ajax Amsterdam,Sunderland,Eredivisie (Países Bajos),2025,comprado,20.000,16.350,3.1,23
+Jorrel Hato,Ajax Amsterdam,Chelsea,Eredivisie (Países Bajos),2025,cantera,44.180,0.000,2.2,19
+Carlos Forbs,Ajax Amsterdam,Club Brugge,Eredivisie (Países Bajos),2025,comprado,6.000,0.000,0,21
+Borna Sosa,Ajax Amsterdam,Crystal Palace,Eredivisie (Países Bajos),2025,comprado,2.300,0.000,0,27
+Christian Rasmussen,Ajax Amsterdam,F. Düsseldorf,Eredivisie (Países Bajos),2025,cantera,1.000,0.000,1,22
+Kristian Hlynsson,Ajax Amsterdam,FC Twente,Eredivisie (Países Bajos),2025,comprado,1.800,0.000,0,21
+Jakov Medic,Ajax Amsterdam,Norwich,Eredivisie (Países Bajos),2025,comprado,2.000,0.000,0,26
+Diant Ramaj,Ajax Amsterdam,Dortmund,Eredivisie (Países Bajos),2025,comprado,5.000,5.000,1.5,23
+Benjamin Tahirović,Ajax Amsterdam,Bröndby IF,Eredivisie (Países Bajos),2025,comprado,2.750,7.500,1.6,21
+Youri Regeer,Ajax Amsterdam,FC Twente,Eredivisie (Países Bajos),2023,cantera,0.900,0.000,1,19
+Devyne Rensch,Ajax Amsterdam,Roma,Eredivisie (Países Bajos),2025,cantera,6.000,0.000,4.2,22
+Davy Klaassen,Ajax Amsterdam,Everton,Eredivisie (Países Bajos),2017,cantera,27.000,0.000,5,24
+Steven Bergwijn,Ajax Amsterdam,Al-Ittihad,Eredivisie (Países Bajos),2024,comprado,21.000,31.250,2.2,26
+Gerónimo Rulli,Ajax Amsterdam,Marseille,Eredivisie (Países Bajos),2024,comprado,4.000,8.000,1.6,32
+Jorge Sánchez,Ajax Amsterdam,CD Cruz Azul,Eredivisie (Países Bajos),2024,comprado,3.000,0.000,0,26
+Francisco Conceição,Ajax Amsterdam,Porto,Eredivisie (Países Bajos),2024,comprado,10.240,0.000,0,21
+Georges Mikautadze,Ajax Amsterdam,FC Metz,Eredivisie (Países Bajos),2024,comprado,13.000,0.000,0,23
+Anass Salah-Eddine,Ajax Amsterdam,FC Twente,Eredivisie (Países Bajos),2024,cantera,0.750,0.000,0.6,22
+Mohammed Kudus,Ajax Amsterdam,West Ham,Eredivisie (Países Bajos),2023,comprado,43.000,9.000,3.1,23
+Mohamed Daramy,Ajax Amsterdam,Stade Reims,Eredivisie (Países Bajos),2023,comprado,12.000,0.000,0.1,21
+Edson Álvarez,Ajax Amsterdam,West Ham,Eredivisie (Países Bajos),2023,comprado,38.000,15.000,4.1,25
+Calvin Bassey,Ajax Amsterdam,Fulham,Eredivisie (Países Bajos),2023,comprado,22.500,23.000,1,23
+Jurriën Timber,Ajax Amsterdam,Arsenal,Eredivisie (Países Bajos),2023,cantera,40.000,0.000,2.8,22
+Daley Blind,Ajax Amsterdam,Man Utd,Eredivisie (Países Bajos),2014,comprado,17.500,0.000,4.2,24
+Antony,Ajax Amsterdam,Man Utd,Eredivisie (Países Bajos),2022,comprado,95.000,15.750,2.2,22
+Perr Schuurs,Ajax Amsterdam,Torino,Eredivisie (Países Bajos),2022,comprado,9.400,0.000,4.1,22
+Lisandro Martínez,Ajax Amsterdam,Man Utd,Eredivisie (Países Bajos),2022,comprado,57.370,7.000,3.1,24
+Nicolás Tagliafico,Ajax Amsterdam,Lyon,Eredivisie (Países Bajos),2022,comprado,4.200,4.000,4.5,29
+Sébastien Haller,Ajax Amsterdam,Dortmund,Eredivisie (Países Bajos),2022,comprado,31.000,22.500,1.5,28
+Dominik Kotarski,Ajax Amsterdam,HNK Gorica,Eredivisie (Países Bajos),2022,comprado,1.000,0.000,0,22
+Ryan Gravenberch,Ajax Amsterdam,Bayern Munich,Eredivisie (Países Bajos),2022,cantera,18.500,0.000,2.8,20
+David Neres,Ajax Amsterdam,Shakhtar D.,Eredivisie (Países Bajos),2022,comprado,12.000,17.400,5,24
+Jurgen Ekkelenkamp,Ajax Amsterdam,Hertha BSC,Eredivisie (Países Bajos),2021,cantera,3.000,0.000,2,21
+Kjell Scherpen,Ajax Amsterdam,Brighton,Eredivisie (Países Bajos),2021,comprado,5.000,1.500,2,21
+Răzvan Marin,Ajax Amsterdam,Cagliari,Eredivisie (Países Bajos),2021,comprado,6.900,0.000,0,25
+Noa Lang,Ajax Amsterdam,Club Brugge,Eredivisie (Países Bajos),2021,comprado,6.000,0.000,0,22
+Lassina Traoré,Ajax Amsterdam,Shakhtar D.,Eredivisie (Países Bajos),2021,cantera,10.000,0.000,2,20
+Quincy Promes,Ajax Amsterdam,Spartak Moscow,Eredivisie (Países Bajos),2021,comprado,8.500,15.700,1.7,29
+Sergiño Dest,Ajax Amsterdam,Barcelona,Eredivisie (Países Bajos),2020,cantera,21.000,0.000,1.1,19
+Donny van de Beek,Ajax Amsterdam,Man Utd,Eredivisie (Países Bajos),2020,cantera,39.000,0.000,4.7,23
+Joël Veltman,Ajax Amsterdam,Brighton,Eredivisie (Países Bajos),2020,cantera,1.000,0.000,8.1,28
+Hakim Ziyech,Ajax Amsterdam,Chelsea,Eredivisie (Países Bajos),2020,comprado,40.000,11.000,3.8,27
+Luis Orejuela,Ajax Amsterdam,Cruzeiro,Eredivisie (Países Bajos),2020,comprado,1.300,0.000,0,24
+Dani de Wit,Ajax Amsterdam,AZ Alkmaar,Eredivisie (Países Bajos),2019,cantera,2.000,0.000,0.7,21
+Lasse Schöne,Ajax Amsterdam,Genoa,Eredivisie (Países Bajos),2019,comprado,1.500,0.000,7.1,33
+Rasmus Nissen Kristensen,Ajax Amsterdam,Salzburg,Eredivisie (Países Bajos),2019,comprado,5.000,5.500,1.5,22
+Matthijs de Ligt,Ajax Amsterdam,Juventus,Eredivisie (Países Bajos),2019,cantera,85.500,0.000,2.5,19
+Vaclav Cerny,Ajax Amsterdam,Utrecht,Eredivisie (Países Bajos),2019,cantera,0.900,0.000,3,21
+Daley Sinkgraven,Ajax Amsterdam,Leverkusen,Eredivisie (Países Bajos),2019,comprado,5.000,7.000,4.4,23
+Maximilian Wöber,Ajax Amsterdam,Sevilla FC,Eredivisie (Países Bajos),2019,comprado,10.500,0.000,0,21
+Frenkie de Jong,Ajax Amsterdam,Barcelona,Eredivisie (Países Bajos),2019,cantera,86.000,0.000,3,22
+Justin Kluivert,Ajax Amsterdam,Roma,Eredivisie (Países Bajos),2018,cantera,17.250,0.000,1.5,19
+Davinson Sánchez,Ajax Amsterdam,Tottenham,Eredivisie (Países Bajos),2017,comprado,42.000,5.500,1.1,21
+Jaïro Riedewald,Ajax Amsterdam,Crystal Palace,Eredivisie (Países Bajos),2017,cantera,9.000,0.000,3.6,20
+Kenny Tete,Ajax Amsterdam,Lyon,Eredivisie (Países Bajos),2017,cantera,4.000,0.000,3,21
+Anwar El Ghazi,Ajax Amsterdam,LOSC Lille,Eredivisie (Países Bajos),2017,cantera,7.000,0.000,2.5,21
+Nemanja Gudelj,Ajax Amsterdam,TJ Teda,Eredivisie (Países Bajos),2017,comprado,5.500,6.000,1.6,25
+Riechedly Bazoer,Ajax Amsterdam,Wolfsburg,Eredivisie (Países Bajos),2016,cantera,12.000,0.000,2.5,20
+Jasper Cillessen,Ajax Amsterdam,Barcelona,Eredivisie (Países Bajos),2016,comprado,13.000,3.230,5,27
+Arkadiusz Milik,Ajax Amsterdam,Napoli,Eredivisie (Países Bajos),2016,comprado,32.000,2.800,1.1,22
+Mike van der Hoorn,Ajax Amsterdam,Swansea,Eredivisie (Países Bajos),2016,comprado,2.500,3.800,3,23
+Stefano Denswil,Ajax Amsterdam,Club Brugge,Eredivisie (Países Bajos),2015,cantera,1.200,0.000,2.5,21
+Kenneth Vermeer,Ajax Amsterdam,Feyenoord,Eredivisie (Países Bajos),2014,comprado,1.000,0.000,6.2,28
+Toby Alderweireld,Ajax Amsterdam,Atlético,Eredivisie (Países Bajos),2013,cantera,7.000,0.000,4.7,24
+Christian Eriksen,Ajax Amsterdam,Tottenham,Eredivisie (Países Bajos),2013,cantera,14.150,0.000,3.7,21
+Jan Vertonghen,Ajax Amsterdam,Tottenham,Eredivisie (Países Bajos),2012,comprado,12.500,0.000,5,25
+Luis Suárez,Ajax Amsterdam,Liverpool,Eredivisie (Países Bajos),2011,comprado,26.500,7.500,3.5,24
+Orkun Kökçü,SL Benfica,Besiktas,Liga Portugal,2026,comprado,30.000,0.000,0,25
+Sidny Lopes Cabral,SL Benfica,Trabzonspor,Liga Portugal,2026,comprado,7.000,6.000,0.5,23
+David Jurásek,SL Benfica,Slavia Praha,Liga Portugal,2026,comprado,3.000,0.000,0,25
+Adrian Bajrami,SL Benfica,FC Luzern,Liga Portugal,2025,comprado,0.900,0.000,0,23
+Kerem Aktürkoğlu,SL Benfica,Fenerbahçe,Liga Portugal,2025,comprado,22.500,13.050,1,26
+Martim Neto,SL Benfica,Elche CF,Liga Portugal,2025,comprado,1.500,0.000,0.1,22
+Casper Tengstedt,SL Benfica,Feyenoord,Liga Portugal,2025,comprado,6.000,0.000,0.1,25
+Álvaro Carreras,SL Benfica,Real Madrid,Liga Portugal,2025,comprado,50.000,14.300,1,22
+Ángel Di María,SL Benfica,Real Madrid,Liga Portugal,2010,comprado,33.000,8.000,2.9,22
+João Mário,SL Benfica,Besiktas,Liga Portugal,2025,comprado,2.000,0.000,0,32
+Soualiho Meïté,SL Benfica,PAOK,Liga Portugal,2025,comprado,1.000,0.000,0,31
+Renato Sanches,SL Benfica,Bayern Munich,Liga Portugal,2016,cantera,35.000,0.000,0.7,18
+Arthur Cabral,SL Benfica,Botafogo,Liga Portugal,2025,comprado,12.000,21.000,1.8,27
+Benjamín Rollheiser,SL Benfica,Santos,Liga Portugal,2025,comprado,11.000,9.500,0.6,24
+Niklas Beste,SL Benfica,Freiburg,Liga Portugal,2025,comprado,8.000,8.000,0.6,26
+Marcos Leonardo,SL Benfica,Al-Hilal,Liga Portugal,2024,comprado,40.000,22.000,0.7,21
+Morato,SL Benfica,Nott'm Forest,Liga Portugal,2024,cantera,11.000,0.000,3.2,23
+David Neres,SL Benfica,Napoli,Liga Portugal,2024,comprado,28.000,15.300,2.1,27
+João Neves,SL Benfica,PSG,Liga Portugal,2024,cantera,65.920,0.000,1.6,19
+Paulo Bernardo,SL Benfica,Celtic,Liga Portugal,2024,comprado,3.000,0.000,0.1,22
+Petar Musa,SL Benfica,Dallas,Liga Portugal,2024,comprado,9.000,5.500,1.6,25
+Lucas Veríssimo,SL Benfica,Al-Duhail SC,Liga Portugal,2024,comprado,8.000,0.000,0.1,28
+Chiquinho,SL Benfica,Olympiacos,Liga Portugal,2024,comprado,0.500,0.000,1.6,28
+Gonçalo Guedes,SL Benfica,PSG,Liga Portugal,2017,cantera,30.000,0.000,2.1,20
+Gonçalo Ramos,SL Benfica,PSG,Liga Portugal,2023,comprado,65.000,0.000,0,22
+João Victor,SL Benfica,Vasco da Gama,Liga Portugal,2023,comprado,8.000,0.000,0.5,25
+Odysseas Vlachodimos,SL Benfica,Nott'm Forest,Liga Portugal,2023,comprado,4.900,2.400,5.2,29
+Mihailo Ristic,SL Benfica,Celta de Vigo,Liga Portugal,2023,comprado,1.500,0.000,1.2,27
+Gilberto,SL Benfica,EC Bahia,Liga Portugal,2023,comprado,2.500,3.000,2.9,30
+Julian Weigl,SL Benfica,Mönchengladbach,Liga Portugal,2023,comprado,7.180,0.000,0,27
+Ferro,SL Benfica,Hajduk Split,Liga Portugal,2023,comprado,0.550,0.000,0,25
+Enzo Fernández,SL Benfica,Chelsea,Liga Portugal,2023,comprado,121.000,44.250,0.6,22
+Germán Conti,SL Benfica,Loko Moscow,Liga Portugal,2023,comprado,0.080,0.000,0.1,28
+Gil Dias,SL Benfica,Stuttgart,Liga Portugal,2023,comprado,1.000,1.500,1.6,26
+John Brooks,SL Benfica,TSG Hoffenheim,Liga Portugal,2023,comprado,0.300,0.000,0.4,29
+Tomás Tavares,SL Benfica,Spartak Moscow,Liga Portugal,2023,comprado,2.000,0.000,0.6,21
+Diogo Gonçalves,SL Benfica,Copenhagen,Liga Portugal,2023,comprado,2.400,0.000,2.4,25
+Rodrigo Pinho,SL Benfica,Coritiba FC,Liga Portugal,2022,comprado,0.500,0.000,1.5,31
+Carlos Vinícius,SL Benfica,Fulham,Liga Portugal,2022,comprado,5.000,0.000,0,27
+Roman Yaremchuk,SL Benfica,Club Brugge,Liga Portugal,2022,comprado,17.000,17.000,1.1,26
+Nuno Santos,SL Benfica,Charlotte,Liga Portugal,2022,comprado,1.000,0.000,0.1,23
+Everton,SL Benfica,Flamengo,Liga Portugal,2022,comprado,16.500,20.000,1.9,26
+Pedro Pereira,SL Benfica,Monza,Liga Portugal,2022,comprado,2.870,0.000,0,24
+Jota,SL Benfica,Celtic,Liga Portugal,2022,comprado,16.200,0.000,0,23
+Gedson Fernandes,SL Benfica,Besiktas,Liga Portugal,2022,comprado,16.000,0.000,0,23
+Ilija Vukotić,SL Benfica,Boavista,Liga Portugal,2022,comprado,0.500,0.000,0,23
+Darwin Núñez,SL Benfica,Liverpool,Liga Portugal,2022,comprado,85.000,34.000,1.8,23
+Luca Waldschmidt,SL Benfica,Wolfsburg,Liga Portugal,2021,comprado,12.000,15.000,1,25
+Alfa Semedo,SL Benfica,Vit. Guimarães,Liga Portugal,2021,comprado,1.500,0.000,0.1,23
+Filip Krovinovic,SL Benfica,Hajduk Split,Liga Portugal,2021,comprado,1.500,0.000,0.1,25
+Nuno Tavares,SL Benfica,Arsenal,Liga Portugal,2021,cantera,8.000,0.000,2,21
+Franco Cervi,SL Benfica,Celta de Vigo,Liga Portugal,2021,comprado,5.000,5.700,5,27
+Pedrinho,SL Benfica,Shakhtar D.,Liga Portugal,2021,comprado,18.000,18.000,0.9,23
+Rúben Dias,SL Benfica,Man City,Liga Portugal,2020,cantera,71.600,0.000,3.2,23
+Ivan Zlobin,SL Benfica,Famalicão,Liga Portugal,2020,cantera,1.000,0.000,1.6,23
+Raúl de Tomás,SL Benfica,Espanyol,Liga Portugal,2020,comprado,22.500,20.000,0.5,25
+Lisandro López,SL Benfica,Boca Juniors,Liga Portugal,2019,comprado,3.000,0.000,0,30
+André Carrillo,SL Benfica,Al-Hilal,Liga Portugal,2019,comprado,9.500,0.000,0.1,28
+Eduardo Salvio,SL Benfica,Boca Juniors,Liga Portugal,2019,comprado,7.000,11.000,7,29
+João Félix,SL Benfica,Atlético,Liga Portugal,2019,cantera,127.200,0.000,1,19
+Raúl Jiménez,SL Benfica,Wolves,Liga Portugal,2019,comprado,38.000,0.000,0,28
+Paweł Dawidowicz,SL Benfica,Hellas Verona,Liga Portugal,2019,comprado,3.500,0.000,0,24
+Luka Jović,SL Benfica,Frankfurt,Liga Portugal,2019,comprado,22.340,0.000,0,21
+Salvador Agra,SL Benfica,Legia Warszawa,Liga Portugal,2019,comprado,0.500,0.000,0,27
+Talisca,SL Benfica,GZ Evergrande,Liga Portugal,2018,comprado,19.200,0.000,0,24
+André Horta,SL Benfica,LAFC,Liga Portugal,2018,comprado,5.700,0.000,0,21
+Bryan Cristante,SL Benfica,Atalanta,Liga Portugal,2018,comprado,9.500,0.000,0,23
+João Carvalho,SL Benfica,Nott'm Forest,Liga Portugal,2018,cantera,15.000,0.000,1,21
+Guillermo Celis,SL Benfica,Vit. Guimarães,Liga Portugal,2017,comprado,1.750,0.000,0,24
+Nélson Semedo,SL Benfica,Barcelona,Liga Portugal,2017,cantera,35.700,0.000,2,23
+Pedro Rebocho,SL Benfica,Guingamp,Liga Portugal,2017,comprado,0.550,0.150,0,22
+Marçal,SL Benfica,Lyon,Liga Portugal,2017,comprado,4.500,0.000,0,28
+Hany Mukhtar,SL Benfica,Bröndby IF,Liga Portugal,2017,comprado,1.500,0.000,0,22
+Victor Lindelöf,SL Benfica,Man Utd,Liga Portugal,2017,cantera,35.000,0.000,2,22
+Ederson,SL Benfica,Man City,Liga Portugal,2017,comprado,40.000,0.500,2,23
+Hélder Costa,SL Benfica,Wolves,Liga Portugal,2017,comprado,15.000,0.000,0,23
+Nélson Oliveira,SL Benfica,Norwich,Liga Portugal,2016,comprado,5.850,0.000,0.2,25
+Bebé,SL Benfica,SD Eibar,Liga Portugal,2016,comprado,1.500,0.000,0,25
+Ivan Cavaleiro,SL Benfica,Monaco,Liga Portugal,2015,comprado,15.000,0.000,0,21
+Loris Benito,SL Benfica,Young Boys,Liga Portugal,2015,comprado,3.000,3.000,1,23
+Rogelio Funes Mori,SL Benfica,Monterrey,Liga Portugal,2015,comprado,3.600,0.000,0,24
+João Cancelo,SL Benfica,Valencia,Liga Portugal,2015,comprado,15.000,0.000,0,21
+André Gomes,SL Benfica,Valencia,Liga Portugal,2015,comprado,20.000,0.000,0,21
+Franco Jara,SL Benfica,Olympiacos,Liga Portugal,2015,comprado,1.500,0.000,0.6,26
+Bernardo Silva,SL Benfica,Monaco,Liga Portugal,2015,comprado,15.750,0.000,0,20
+Enzo Pérez,SL Benfica,Valencia,Liga Portugal,2015,comprado,25.000,0.000,2.5,28
+Jan Oblak,SL Benfica,Atlético,Liga Portugal,2014,comprado,16.000,0.000,1,21
+Stefan Mitrovic,SL Benfica,Freiburg,Liga Portugal,2014,comprado,1.500,0.000,0,24
+Lazar Markovic,SL Benfica,Liverpool,Liga Portugal,2014,comprado,25.000,10.000,1,20
+Nemanja Matić,SL Benfica,Chelsea,Liga Portugal,2014,comprado,25.000,5.000,2.5,25
+Axel Witsel,SL Benfica,Zenit S-Pb,Liga Portugal,2012,comprado,40.000,9.000,1.1,23
+Daniel Wass,SL Benfica,Évian,Liga Portugal,2012,comprado,1.200,0.000,0,23
+Oscar Salomón,Boca Juniors,Newell's,Liga Profesional Argentina,2026,comprado,0.860,0.000,0.1,26
+Vicente Taborda,Boca Juniors,Panathinaikos,Liga Profesional Argentina,2025,comprado,4.300,0.000,0,24
+Jorman Campuzano,Boca Juniors,Atl. Nacional,Liga Profesional Argentina,2025,comprado,1.450,0.000,0,29
+Leandro Paredes,Boca Juniors,Roma,Liga Profesional Argentina,2015,comprado,6.000,0.000,0,21
+Cristian Medina,Boca Juniors,Estudiantes LP,Liga Profesional Argentina,2025,cantera,14.600,0.000,4.4,22
+Aarón Anselmino,Boca Juniors,Chelsea,Liga Profesional Argentina,2024,cantera,16.500,0.000,0.6,19
+Pol Fernández,Boca Juniors,Godoy Cruz,Liga Profesional Argentina,2016,comprado,1.350,0.000,0,24
+Equi Fernández,Boca Juniors,Al-Qadsiah,Liga Profesional Argentina,2024,cantera,18.700,0.000,1.6,22
+Luca Langoni,Boca Juniors,New England,Liga Profesional Argentina,2024,cantera,6.200,0.000,2.1,22
+Valentín Barco,Boca Juniors,Brighton,Liga Profesional Argentina,2024,cantera,9.150,0.000,0.6,19
+Adrián Sánchez,Boca Juniors,Atl. Tucumán,Liga Profesional Argentina,2023,comprado,0.470,0.000,0,24
+Luciano Giménez,Boca Juniors,Chacarita Jrs.,Liga Profesional Argentina,2023,comprado,0.460,0.000,0,23
+Agustín Sández,Boca Juniors,Rosario Central,Liga Profesional Argentina,2023,cantera,0.917,0.000,2.1,22
+Alan Varela,Boca Juniors,Porto,Liga Profesional Argentina,2023,cantera,8.000,0.000,2.6,22
+Luis Vázquez,Boca Juniors,RSC Anderlecht,Liga Profesional Argentina,2023,cantera,4.500,0.000,2.1,22
+Mateo Retegui,Boca Juniors,Tigre,Liga Profesional Argentina,2023,comprado,8.430,0.000,0,24
+Gastón Ávila,Boca Juniors,Royal Antwerp,Liga Profesional Argentina,2022,comprado,4.400,0.000,0.6,20
+Ramón Ábila,Boca Juniors,Colon,Liga Profesional Argentina,2022,comprado,1.500,0.000,0.1,32
+Lisandro López,Boca Juniors,Club Tijuana,Liga Profesional Argentina,2022,comprado,2.000,3.000,2.1,32
+Walter Bou,Boca Juniors,Defensa,Liga Profesional Argentina,2022,comprado,1.320,0.000,0.1,28
+Franco Cristaldo,Boca Juniors,Huracán,Liga Profesional Argentina,2021,comprado,0.442,0.000,0,25
+Seba Pérez,Boca Juniors,Boavista,Liga Profesional Argentina,2021,comprado,1.300,0.000,0,28
+Mauro Luna Diale,Boca Juniors,Unión Santa Fe,Liga Profesional Argentina,2021,cantera,0.420,0.000,0,22
+Iván Marcone,Boca Juniors,Elche CF,Liga Profesional Argentina,2021,comprado,4.000,0.000,0,31
+Lucas Olaza,Boca Juniors,Real Valladolid,Liga Profesional Argentina,2021,comprado,2.000,0.000,0,26
+Nicolás Capaldo,Boca Juniors,Salzburg,Liga Profesional Argentina,2021,cantera,4.500,0.000,2,22
+Emanuel Reynoso,Boca Juniors,Minnesota,Liga Profesional Argentina,2020,comprado,4.270,1.200,2.6,24
+Javier García,Boca Juniors,Tigre,Liga Profesional Argentina,2012,comprado,0.500,0.000,0,25
+Nahitan Nández,Boca Juniors,Cagliari,Liga Profesional Argentina,2019,comprado,16.200,2.500,2,23
+Wilmar Barrios,Boca Juniors,Zenit S-Pb,Liga Profesional Argentina,2019,comprado,15.000,2.600,2.4,25
+Leonardo Balerdi,Boca Juniors,Dortmund,Liga Profesional Argentina,2019,cantera,15.500,0.000,0.5,19
+Lisandro Magallán,Boca Juniors,Ajax,Liga Profesional Argentina,2018,comprado,9.000,0.000,2.5,25
+Juan Manuel Insaurralde,Boca Juniors,Spartak Moscow,Liga Profesional Argentina,2012,comprado,3.300,1.500,2.1,27
+Agustín Bouzat,Boca Juniors,Vélez Sarsfield,Liga Profesional Argentina,2017,cantera,0.945,0.000,0.5,23
+Rodrigo Bentancur,Boca Juniors,Juventus,Liga Profesional Argentina,2017,comprado,23.500,0.000,2.5,20
+Luciano Acosta,Boca Juniors,D.C. United,Liga Profesional Argentina,2016,comprado,1.300,0.000,0,22
+Sebastián Palacios,Boca Juniors,CA Talleres,Liga Profesional Argentina,2016,comprado,1.800,0.000,1.6,24
+Juan Cruz Komar,Boca Juniors,CA Talleres,Liga Profesional Argentina,2016,comprado,0.670,0.000,0,19
+Jonathan Calleri,Boca Juniors,CD Maldonado,Liga Profesional Argentina,2016,comprado,11.000,0.900,1.5,22
+Sergio Araujo,Boca Juniors,UD Las Palmas,Liga Profesional Argentina,2015,comprado,2.500,0.000,0,23
+Gonzalo Escalante,Boca Juniors,Catania,Liga Profesional Argentina,2015,comprado,0.500,0.000,0,21
+Leo Suárez,Boca Juniors,Villarreal CF B,Liga Profesional Argentina,2014,comprado,2.000,0.000,0.5,18
+Ezequiel Muñoz,Boca Juniors,US Palermo,Liga Profesional Argentina,2010,comprado,5.000,0.000,2.1,19
+Éver Banega,Boca Juniors,Valencia,Liga Profesional Argentina,2008,cantera,18.000,0.000,1,19
+Óscar Trejo,Boca Juniors,RCD Mallorca,Liga Profesional Argentina,2007,comprado,2.500,0.000,1.6,18
