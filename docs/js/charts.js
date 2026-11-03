@@ -68,7 +68,7 @@
 
   function promedio(d, p) {
     const o = base(p);
-    o.scales.x = eje(p, "Club", { grid: { display: false }, ticks: { color: p.t3, autoSkip: false, maxRotation: 0 } });
+    o.scales.x = eje(p, "Liga", { grid: { display: false }, ticks: { color: p.t3, autoSkip: false, maxRotation: 0 } });
     o.scales.y = eje(p, "Fee promedio de venta (M€)", { beginAtZero: true, ticks: { color: p.t3, callback: fmtEje } });
     o.plugins.tooltip.callbacks = {
       label: (c) => {

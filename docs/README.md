@@ -2,7 +2,18 @@
 
 Sitio estático (HTML/CSS/JS + Chart.js 4.4.1 + PapaParse 5.4.1 desde cdnjs), sin backend. Se publica con GitHub Pages desde la carpeta `/docs` de `main`.
 
-## Datos: cómo reemplazar la muestra
+## Datos
+
+El CSV real (`docs/data/ventas.csv`) ahora lo exporta el notebook del grupo
+(`notebooks/tp_inferiores.ipynb`, celda "Exportación para el sitio web"), con datos de 8 ligas
+y ~235 clubes. La columna `liga` trae el código de Transfermarkt (`ARG1`, `ES1`, `FR1`, `GB1`,
+`MEX1`, `NL1`, `PO1`, `SA1`); `js/app.js` lo traduce a un nombre legible (ver `LIGA_NOMBRE`).
+Si el notebook agrega una liga nueva, hay que sumar su código a ese diccionario o el filtro va
+a mostrar el código crudo. El filtro de la sección "Lo que muestran los datos" es por liga, no
+por club (con ~235 clubes, una chip por club sería inmanejable); el club sigue visible en el
+ranking, el comparador y las tablas.
+
+## Cómo reemplazar la muestra
 
 El sitio busca primero `docs/data/ventas.csv`. Si no existe, usa `docs/data/ventas_MUESTRA.csv` (**datos ficticios**) y muestra un aviso rojo arriba de todo. Cuando el CSV real esté en su lugar, el aviso desaparece solo. No hay que tocar código.
 

@@ -10,10 +10,14 @@
     interactivos, metodología, resultados, simulador de rentabilidad, ranking y comparador,
     con la regla de que todos los números se calculen desde el CSV exportado por el notebook.
   - Paleta de colores validada con un script de chequeo de daltonismo/contraste (dataviz skill).
-  - Revisión humana: Renzo Bianco armó el pipeline de datos reales (datos/scripts/build_ventas.js,
-    a partir de datos/raw/transfers.csv y players.csv) y completó metodología, interpretaciones
-    de los 3 gráficos y la respuesta a la pregunta de investigación con los resultados reales,
-    el 28/10/2026. Falta revisión cruzada del resto del grupo antes de la entrega.
+  - Revisión humana: Renzo Bianco armó el pipeline de datos reales inicial (28/10/2026, con 4
+    clubes) y completó metodología, interpretaciones y conclusiones. El resto del grupo (Liam
+    Cohen, Federico Kurozwan, Milagros Leon) amplió el dataset a 8 ligas y ~235 clubes en
+    notebooks/tp_inferiores.ipynb con una clasificación cantera/comprado más precisa (edad de
+    llegada + fee, en vez de nombres de equipos juveniles). Renzo Bianco actualizó el sitio
+    el 03/11/2026 para ese dataset ampliado: filtros por liga (antes por club, inmanejable con
+    ~235), y metodología, interpretaciones y conclusiones recalculadas con los números reales.
+    Falta revisión cruzada del resto del grupo antes de la entrega.
 
   Datos: se leen de data/ventas.csv. Si no existe, se usa data/ventas_MUESTRA.csv (datos
   ficticios) y se muestra un aviso. Ver docs/README.md para el formato de columnas.
@@ -23,7 +27,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cantera vs. Comprados</title>
-  <meta name="description" content="Peso y rentabilidad de las ventas de jugadores formados en inferiores frente a jugadores comprados, en cinco clubes de cinco ligas.">
+  <meta name="description" content="Peso y rentabilidad de las ventas de jugadores formados en inferiores frente a jugadores comprados, en más de 200 clubes de 8 ligas.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -94,14 +98,14 @@
     <section id="metodologia" class="capitulo reveal">
       <p class="num-cap">02</p>
       <h2>Cómo lo medimos</h2>
-      <p class="lead">Cada fila del dataset es una <strong>venta con fee</strong> de un jugador del plantel profesional. Cada venta se clasifica según cómo llegó el jugador al club.</p>
+      <p class="lead">Cada fila del dataset es una <strong>venta con fee</strong> de un jugador del plantel profesional. Cada venta se clasifica según cómo llegó el jugador al club: se recorren sus llegadas de la más reciente a la más vieja, ignorando las vueltas de préstamo (llegadas sin monto desde un club al que antes había salido sin monto).</p>
 
-      <div class="caminos" role="img" aria-label="Diagrama: la cantera va de las inferiores al primer equipo y a la venta, con costo de adquisición cero. Los comprados llegan por transferencia con fee mayor a cero y luego se venden; la rentabilidad es fee de venta menos fee de compra.">
+      <div class="caminos" role="img" aria-label="Diagrama: la cantera llega antes de los 18 años sin que se pague nada por ella, y su rentabilidad es el fee de venta completo. Los comprados llegan después de los 18 o con un fee de compra mayor a cero; su rentabilidad es fee de venta menos fee de compra.">
         <div class="camino camino-cantera">
           <h3><span class="sw sw-cantera" aria-hidden="true"></span>Cantera</h3>
           <ol class="flujo">
-            <li>Inferiores del club</li>
-            <li>Debut en primera</li>
+            <li>Llega antes de los 18 años</li>
+            <li>Sin fee de llegada</li>
             <li>Venta</li>
           </ol>
           <p class="formula">Rentabilidad = fee de venta <span class="menos">− 0</span></p>
@@ -110,21 +114,21 @@
         <div class="camino camino-comprado">
           <h3><span class="sw sw-comprado" aria-hidden="true"></span>Comprados</h3>
           <ol class="flujo">
-            <li>Transferencia con fee &gt; 0</li>
+            <li>Llega con 18 años o más, o se pagó por él</li>
             <li>Juega en el club</li>
             <li>Venta</li>
           </ol>
           <p class="formula">Rentabilidad = fee de venta − fee de compra</p>
-          <p class="aclara">Quedan afuera los libres, los préstamos y las llegadas sin fee informado.</p>
+          <p class="aclara">Quedan afuera los préstamos y las ventas sin fee informado. Cuando el costo de compra no está registrado, la venta se cuenta en los ingresos pero queda afuera de los cálculos de rentabilidad.</p>
         </div>
       </div>
 
       <ul class="metodo-lista">
-        <li><strong>Clubes:</strong> uno por liga: <span data-k="lista_clubes">—</span>.</li>
+        <li><strong>Ligas analizadas (<span data-k="n_ligas">—</span>):</strong> <span data-k="lista_ligas">—</span>.</li>
         <li><strong>Período:</strong> ventas entre <span data-k="periodo">—</span>.</li>
         <li><strong>Años en el club:</strong> tiempo entre la llegada (o el debut, para la cantera) y la venta.</li>
         <li><strong>Unidad:</strong> millones de euros nominales, sin ajustar por inflación.</li>
-        <li><strong>Fuente:</strong> Transfermarkt, vía el dataset público <a href="https://github.com/dcaribou/transfermarkt-datasets">dcaribou/transfermarkt-datasets</a>, descargado el 28/10/2026.</li>
+        <li><strong>Fuente:</strong> Transfermarkt, vía el dataset público <a href="https://github.com/dcaribou/transfermarkt-datasets">dcaribou/transfermarkt-datasets</a>. Procesado en el notebook del grupo (<a href="https://github.com/liamcohenn/tp_laboratorio_futbol/blob/main/notebooks/tp_inferiores.ipynb">notebooks/tp_inferiores.ipynb</a>).</li>
       </ul>
     </section>
 
@@ -136,7 +140,7 @@
 
       <div class="filtros" role="group" aria-label="Filtros">
         <fieldset class="filtro-clubes">
-          <legend>Club</legend>
+          <legend>Liga</legend>
           <div id="chips-clubes" class="chips"></div>
         </fieldset>
         <div class="filtro-anios">
@@ -156,20 +160,20 @@
         <div class="lienzo"><canvas id="g-evolucion" role="img" aria-describedby="d-evolucion"></canvas></div>
         <p class="g-desc" id="d-evolucion"></p>
         <details class="tabla-dato"><summary>Ver datos en tabla</summary><div id="t-evolucion"></div></details>
-        <div class="interpretacion"><h4>Interpretación</h4><p>Los ingresos por ventas crecen en los cuatro clubes a lo largo del período (2002-2026), lo que acompaña la inflación general del mercado de pases. El peso de la cantera sobre el total no es constante: llegó a representar cerca del 40% de los ingresos entre 2016 y 2020, pero bajó a menos del 20% en 2021 en adelante, cuando las ventas de jugadores comprados se dispararon en monto y en cantidad.</p></div>
+        <div class="interpretacion"><h4>Interpretación</h4><p>Los ingresos por ventas crecen fuertemente a lo largo del período, lo que acompaña tanto la inflación del mercado de pases como la mayor cantidad de ventas registradas en los años recientes. El peso relativo de la cantera se mantiene bastante estable desde 2010 (entre 21% y 27% de los ingresos según el tramo), sin una tendencia clara al alza ni a la baja; el tramo anterior a 2010 muestra una participación más alta, pero con muy pocas ventas registradas para sacar conclusiones.</p></div>
       </article>
 
       <article class="grafico reveal">
         <header>
           <p class="g-num">Gráfico 2 · Comparación</p>
-          <h3>Fee promedio de venta por club y grupo</h3>
+          <h3>Fee promedio de venta por liga y grupo</h3>
           <p class="g-sub">Promedio en M€. El tooltip muestra la mediana y la cantidad de ventas.</p>
         </header>
         <div class="leyenda" aria-hidden="true"><span><i class="sw sw-cantera"></i>Cantera</span><span><i class="sw sw-comprado"></i>Comprados</span></div>
         <div class="lienzo"><canvas id="g-promedio" role="img" aria-describedby="d-promedio"></canvas></div>
         <p class="g-desc" id="d-promedio"></p>
         <details class="tabla-dato"><summary>Ver datos en tabla</summary><div id="t-promedio"></div></details>
-        <div class="interpretacion"><h4>Interpretación</h4><p>En tres de los cuatro clubes (Ajax, Benfica y Boca Juniors) el fee promedio de venta de un jugador de cantera supera al de uno comprado — en Benfica casi lo triplica (≈€39,6M vs. ≈€13,7M). Barcelona es la excepción (≈€12,1M cantera vs. ≈€19,6M comprado), aunque con solo 7 ventas de cantera registradas, una muestra chica para sacar conclusiones firmes. En conjunto, la mediana de venta de un jugador de cantera (≈€11,5M) casi duplica la de uno comprado (≈€6,9M).</p></div>
+        <div class="interpretacion"><h4>Interpretación</h4><p>El fee promedio no favorece siempre al mismo grupo: en Premier League, Países Bajos, LaLiga, Francia y Arabia Saudita, un comprado se vende en promedio más caro que un canterano; en Argentina, Portugal y México pasa lo contrario. El caso más marcado es Portugal (cantera ≈€11,0M vs. comprados ≈€6,5M de promedio). En el conjunto de las 8 ligas, el fee promedio es ≈€7,4M para la cantera y ≈€8,7M para los comprados: la cantera se vende, en promedio, más barata — aunque, como muestran las conclusiones, deja mejor margen por no tener costo de adquisición.</p></div>
       </article>
 
       <article class="grafico reveal">
@@ -182,7 +186,7 @@
         <div class="lienzo lienzo-alto"><canvas id="g-dispersion" role="img" aria-describedby="d-dispersion"></canvas></div>
         <p class="g-desc" id="d-dispersion"></p>
         <details class="tabla-dato"><summary>Ver regresión en tabla</summary><div id="t-dispersion"></div></details>
-        <div class="interpretacion"><h4>Interpretación</h4><p>La cantidad de años en el club explica muy poco de la variación del fee de venta: la correlación es prácticamente nula en cantera (r≈0,02) y débil en comprados (r≈0,23). Dicho de otra forma, un jugador de cantera puede venderse caro tanto si debutó hace un año como si lleva diez — lo que más pesa en su precio parece ser el talento que mostró, no la antigüedad. Entre los comprados hay una leve tendencia a vender más caro a quien lleva más tiempo en el club, aunque sigue siendo una relación débil.</p></div>
+        <div class="interpretacion"><h4>Interpretación</h4><p>Los años en el club siguen explicando muy poco de la variación del fee de venta, incluso con una muestra mucho más grande: la correlación es débil en cantera (R²≈0,04) y prácticamente nula en comprados (R²≈0,01). La variable que sí marca una diferencia, según el notebook del grupo, es la edad a la que el jugador llegó al club: la ganancia de reventa de un comprado cae de una mediana de ≈€2,5M para los que llegan antes de los 21 años a casi €0 para los que llegan después de los 29. Ese patrón no se ve en este gráfico porque compara años en el club, no edad de llegada — ver el Gráfico 3 del notebook (<code>notebooks/tp_inferiores.ipynb</code>) para esa relación.</p></div>
       </article>
     </section>
 
@@ -244,15 +248,15 @@
       </div>
       <div class="respuesta">
         <h3>Respuesta a la pregunta</h3>
-        <!-- Conclusiones preliminares sobre los 4 clubes analizados (265 ventas). Revisar/ajustar en el informe final del grupo. -->
-        <p>En los cuatro clubes analizados, las ventas de jugadores de cantera pesan menos en cantidad (58 de 265 ventas, ≈22%) pero más que proporcionalmente en ingresos (28% del total facturado) y, sobre todo, en rentabilidad: en promedio dejan ≈€19,6M limpios por venta frente a ≈€8,0M de un jugador comprado, casi 2,4 veces más. Esa ventaja se sostiene en 3 de los 4 clubes (todos menos Barcelona) y no depende de cuánto tiempo pase el jugador en el club antes de venderse. En síntesis: la cantera genera menos operaciones, pero cada una es, en promedio, bastante más rentable que comprar y revender.</p>
+        <!-- Conclusiones sobre las 8 ligas analizadas (5.280 ventas, +200 clubes). Revisar/ajustar en el informe final del grupo. -->
+        <p>Con datos de 8 ligas (5.280 ventas, más de 200 clubes), la cantera pesa menos de lo que parecía con la muestra inicial de 4 clubes: es el 26% de las ventas y el 23% de los ingresos, levemente por debajo de su peso en cantidad. Tampoco se vende más cara en promedio — al contrario, un canterano se vende en promedio por menos (≈€7,4M) que un comprado (≈€8,7M). Pero en rentabilidad la cantera sigue ganando con claridad: su ganancia mediana (≈€3,0M, que es directamente el fee de venta) casi triplica la de un comprado con costo de compra conocido (≈€1,1M), porque el club no pagó nada por formarla. Esa ventaja no es pareja: depende mucho de la liga y del club. Argentina es, por lejos, la liga más dependiente de su cantera (48,5% de sus ingresos), y clubes como River, Boca, Benfica, Sporting o Ajax recaudan una porción mucho mayor de sus ventas gracias a jugadores propios que las ligas más ricas de Europa (Premier League 20,0%, LaLiga 15,1%), donde el negocio pasa más por comprar y revender.</p>
         <h3>Limitaciones</h3>
         <ul>
-          <li>Un club por liga: los resultados describen a esos clubes y no a la liga entera.</li>
+          <li>El costo de compra queda sin registrar en ≈725 de los 3.911 comprados (≈19%): esas ventas cuentan en los ingresos pero no entran en los cálculos de rentabilidad.</li>
           <li>El costo de formar un jugador de cantera no es cero, aunque no figure en los datos de transferencias; la rentabilidad de la cantera está sobreestimada en esa medida.</li>
           <li>Montos nominales sin ajustar por inflación ni por variaciones del mercado de pases.</li>
-          <li>La clasificación cantera/comprado se infiere por el nombre del club de origen (sufijos tipo U19, U21, B, II); no es un campo provisto por la fuente, así que puede haber errores puntuales de clasificación.</li>
-          <li>Jugadores comprados que llegaron a costo cero (fin de contrato) muestran rentabilidad igual a su fee de venta completo, igual que la cantera — conviene no leer "comprado" como sinónimo de "con costo de adquisición alto".</li>
+          <li>La clasificación cantera/comprado (edad de llegada menor a 18 años y sin fee pagado, según el notebook del grupo) puede fallar cuando el dataset no tiene el historial juvenil completo de un jugador. Arabia Saudita es el caso más claro: aparece con 36,9% de ingresos "de cantera", pero buena parte son jugadores sin historial juvenil registrado, no formados genuinamente en el club — una alerta que el propio notebook señala.</li>
+          <li>El ranking de clubes se filtra a los que tienen al menos 15 ventas; México y Arabia Saudita quedan con pocos clubes que llegan a ese mínimo.</li>
         </ul>
       </div>
     </section>
@@ -260,7 +264,7 @@
 
   <footer class="pie">
     <p>TP Grupal · Laboratorio de Métodos Cuantitativos Aplicados a la Gestión · FCE-UBA · 2C 2026</p>
-    <p>Integrantes: Liam Cohen, Renzo Bianco <!-- sumar acá si hay más integrantes en el grupo --> · <a href="https://github.com/liamcohenn/tp_laboratorio_futbol">Repositorio</a></p>
+    <p>Integrantes: Liam Cohen, Renzo Bianco Maura, Federico Kurozwan, Milagros Leon · <a href="https://github.com/liamcohenn/tp_laboratorio_futbol">Repositorio</a></p>
     <p class="nota">Código generado con asistencia de IA (Claude Opus 5.5) y revisado por el grupo. Fuente de datos: <span id="fuente-archivo">—</span>.</p>
   </footer>
 

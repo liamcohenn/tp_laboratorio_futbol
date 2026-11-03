@@ -7,6 +7,13 @@
   const ARCHIVO_MUESTRA = "data/ventas_MUESTRA.csv";
   const REQUERIDAS = ["jugador", "club_vendedor", "liga", "temporada_venta", "grupo", "fee_venta", "fee_compra", "anios_en_club"];
   const GRUPOS = ["cantera", "comprado"];
+  // El notebook deja `liga` como código de Transfermarkt (ARG1, ES1, ...); acá se traduce para mostrar.
+  const LIGA_NOMBRE = {
+    ARG1: "Liga Profesional Argentina", ES1: "LaLiga (España)", FR1: "Ligue 1 (Francia)",
+    GB1: "Premier League (Inglaterra)", MEX1: "Liga MX (México)", NL1: "Eredivisie (Países Bajos)",
+    PO1: "Liga Portugal", SA1: "Saudi Pro League (Arabia Saudita)",
+  };
+  const nombreLiga = (codigo) => LIGA_NOMBRE[String(codigo || "").trim().toUpperCase()] || String(codigo || "").trim();
 
   const $ = (s) => document.querySelector(s);
   const fmt = (v) => Graficos.fmt(v);
@@ -18,7 +25,7 @@
   };
 
   let TODOS = [];
-  const estado = { clubes: new Set(), desde: null, hasta: null };
+  const estado = { ligas: new Set(), desde: null, hasta: null };
 
   /* ---------- Estadística ---------- */
   const suma = (a) => a.reduce((s, v) => s + v, 0);
@@ -79,14 +86,17 @@
       if (g === "cantera" && isNaN(fc)) fc = 0;
       const o = {
         jugador: String(r.jugador || "").trim(), club_vendedor: String(r.club_vendedor || "").trim(),
-        club_comprador: String(r.club_comprador || "").trim(), liga: String(r.liga || "").trim(),
+        club_comprador: String(r.club_comprador || "").trim(), liga: nombreLiga(r.liga),
         temporada_venta: parseInt(r.temporada_venta, 10), grupo: g, fee_venta: fv, fee_compra: fc,
         anios_en_club: num(r.anios_en_club), edad_venta: num(r.edad_venta),
       };
+      // Si el costo de compra es desconocido (comprados sin fee de llegada registrado), la rentabilidad
+      // queda sin definir en vez de asumir 0 — igual que en el notebook del grupo. La venta sigue contando
+      // para ingresos, promedios y el resto de los gráficos.
       o.rentabilidad = tieneRent && !isNaN(num(r.rentabilidad)) ? num(r.rentabilidad) : fv - fc;
       return o;
     }).filter((o) => {
-      const ok = GRUPOS.includes(o.grupo) && !isNaN(o.fee_venta) && !isNaN(o.fee_compra) && !isNaN(o.anios_en_club) && !isNaN(o.temporada_venta);
+      const ok = GRUPOS.includes(o.grupo) && !isNaN(o.fee_venta) && !isNaN(o.anios_en_club) && !isNaN(o.temporada_venta);
       if (!ok) descartadas++;
       return ok;
     });
@@ -105,28 +115,33 @@
   }
 
   /* ---------- Filtros ---------- */
+  // El dataset tiene ~235 clubes: filtrar por club haría 235 chips inmanejables, así que el filtro
+  // es por liga (8 opciones) y el club sigue visible en el ranking, el comparador y las tablas.
   const clubesUnicos = () => {
     const m = new Map();
     TODOS.forEach((r) => m.set(r.club_vendedor, r.liga));
-    return [...m.entries()].sort((a, b) => a[1].localeCompare(b[1]));
+    return [...m.entries()].sort((a, b) => a[1].localeCompare(b[1]) || a[0].localeCompare(b[0]));
   };
-  const filtrados = () => TODOS.filter((r) => estado.clubes.has(r.club_vendedor) && r.temporada_venta >= estado.desde && r.temporada_venta <= estado.hasta);
+  const ligasUnicas = () => [...new Set(TODOS.map((r) => r.liga))].sort();
+  const filtrados = () => TODOS.filter((r) => estado.ligas.has(r.liga) && r.temporada_venta >= estado.desde && r.temporada_venta <= estado.hasta);
 
   function armarFiltros() {
     const cont = $("#chips-clubes");
-    const clubes = clubesUnicos();
-    clubes.forEach(([c]) => estado.clubes.add(c));
+    const ligas = ligasUnicas();
+    ligas.forEach((l) => estado.ligas.add(l));
+    const nClubesPorLiga = new Map();
+    clubesUnicos().forEach(([, l]) => nClubesPorLiga.set(l, (nClubesPorLiga.get(l) || 0) + 1));
     const boton = (txt, html, fn) => {
       const b = document.createElement("button");
-      b.type = "button"; b.className = "chip"; b.innerHTML = html; b.dataset.club = txt;
+      b.type = "button"; b.className = "chip"; b.innerHTML = html; b.dataset.liga = txt;
       b.addEventListener("click", fn); cont.appendChild(b); return b;
     };
-    boton("__todos", "Todos", () => { clubes.forEach(([c]) => estado.clubes.add(c)); actualizar(); });
-    clubes.forEach(([c, liga]) => boton(c, `${esc(c)} <small>${esc(liga)}</small>`, () => {
-      // Click en un club con todos activos = ver solo ese club. Si no, alterna (sin dejar cero).
-      if (estado.clubes.size === clubes.length) { estado.clubes.clear(); estado.clubes.add(c); }
-      else if (estado.clubes.has(c)) { if (estado.clubes.size > 1) estado.clubes.delete(c); }
-      else estado.clubes.add(c);
+    boton("__todos", "Todas", () => { ligas.forEach((l) => estado.ligas.add(l)); actualizar(); });
+    ligas.forEach((l) => boton(l, `${esc(l)} <small>${nClubesPorLiga.get(l) || 0} clubes</small>`, () => {
+      // Click en una liga con todas activas = ver solo esa. Si no, alterna (sin dejar cero).
+      if (estado.ligas.size === ligas.length) { estado.ligas.clear(); estado.ligas.add(l); }
+      else if (estado.ligas.has(l)) { if (estado.ligas.size > 1) estado.ligas.delete(l); }
+      else estado.ligas.add(l);
       actualizar();
     }));
 
@@ -141,9 +156,9 @@
   }
 
   function pintarChips() {
-    const total = clubesUnicos().length;
+    const total = ligasUnicas().length;
     document.querySelectorAll("#chips-clubes .chip").forEach((b) => {
-      const on = b.dataset.club === "__todos" ? estado.clubes.size === total : estado.clubes.size !== total && estado.clubes.has(b.dataset.club);
+      const on = b.dataset.liga === "__todos" ? estado.ligas.size === total : estado.ligas.size !== total && estado.ligas.has(b.dataset.liga);
       b.setAttribute("aria-pressed", on);
     });
   }
@@ -156,6 +171,9 @@
     const tot = ca.total + co.total;
     const anios = TODOS.map((r) => r.temporada_venta);
     const clubes = clubesUnicos();
+    const ligas = ligasUnicas();
+    const nClubesPorLiga = new Map();
+    clubes.forEach(([, l]) => nClubesPorLiga.set(l, (nClubesPorLiga.get(l) || 0) + 1));
     pintarClave("pct_cantera", pct(ca.total / tot));
     pintarClave("pct_n_cantera", pct(ca.n / TODOS.length));
     pintarClave("n_ventas", TODOS.length.toLocaleString("es-AR"));
@@ -164,30 +182,43 @@
     pintarClave("prom_comprado", fmt(co.prom));
     pintarClave("periodo", `${Math.min(...anios)}–${Math.max(...anios)}`);
     pintarClave("n_clubes", clubes.length);
-    pintarClave("n_ligas", new Set(clubes.map((c) => c[1])).size);
-    pintarClave("lista_clubes", clubes.map(([c, l]) => `${c} (${l})`).join(", "));
+    pintarClave("n_ligas", ligas.length);
+    pintarClave("lista_ligas", ligas.map((l) => `${l} (${nClubesPorLiga.get(l) || 0} clubes)`).join(", "));
   }
 
   function hechos() {
     const ca = porGrupo(TODOS, "cantera"), co = porGrupo(TODOS, "comprado");
     const rca = resumen(ca), rco = resumen(co);
     const tot = rca.total + rco.total;
-    const rentCo = co.map((r) => r.rentabilidad);
-    const perdida = co.filter((r) => r.rentabilidad < 0).length;
+    const rentCoConocida = co.map((r) => r.rentabilidad).filter((v) => !isNaN(v));
+    const perdida = rentCoConocida.filter((v) => v < 0).length;
     const regCa = regresion(ca), regCo = regresion(co);
-    const porClub = clubesUnicos().map(([c, l]) => {
-      const rows = TODOS.filter((r) => r.club_vendedor === c);
+
+    const porLiga = ligasUnicas().map((l) => {
+      const rows = TODOS.filter((r) => r.liga === l);
       const t = suma(rows.map((r) => r.fee_venta));
-      return { c, l, share: t ? suma(rows.filter((r) => r.grupo === "cantera").map((r) => r.fee_venta)) / t : NaN };
+      return { l, n: rows.length, share: t ? suma(rows.filter((r) => r.grupo === "cantera").map((r) => r.fee_venta)) / t : NaN };
     }).filter((x) => !isNaN(x.share)).sort((a, b) => b.share - a.share);
 
+    const MIN_VENTAS_CLUB = 15;
+    const mapaClubes = new Map();
+    TODOS.forEach((r) => { if (!mapaClubes.has(r.club_vendedor)) mapaClubes.set(r.club_vendedor, { liga: r.liga, rows: [] }); mapaClubes.get(r.club_vendedor).rows.push(r); });
+    const porClub = [...mapaClubes.entries()].map(([c, { liga, rows }]) => {
+      const t = suma(rows.map((r) => r.fee_venta));
+      return { c, liga, n: rows.length, share: t ? suma(rows.filter((r) => r.grupo === "cantera").map((r) => r.fee_venta)) / t : NaN };
+    }).filter((x) => x.n >= MIN_VENTAS_CLUB && !isNaN(x.share)).sort((a, b) => b.share - a.share);
+
     const L = [];
-    L.push(`Las ventas de cantera suman <strong>${fmt(rca.total)}</strong> (${pct(rca.total / tot)} de los ingresos) con ${rca.n} ventas. Las de comprados suman <strong>${fmt(rco.total)}</strong> con ${rco.n} ventas.`);
+    L.push(`Las ventas de cantera suman <strong>${fmt(rca.total)}</strong> (${pct(rca.total / tot)} de los ingresos) con ${rca.n} ventas (${pct(rca.n / (rca.n + rco.n))} del total). Las de comprados suman <strong>${fmt(rco.total)}</strong> con ${rco.n} ventas.`);
     L.push(`Fee promedio por venta: cantera <strong>${fmt(rca.prom)}</strong> (mediana ${fmt(rca.med)}) vs. comprados <strong>${fmt(rco.prom)}</strong> (mediana ${fmt(rco.med)}).`);
-    L.push(`Rentabilidad media: cantera <strong>${fmt(media(ca.map((r) => r.rentabilidad)))}</strong> por venta (sin costo de adquisición) vs. comprados <strong>${fmt(media(rentCo))}</strong>. ${perdida} de ${co.length} comprados (${pct(perdida / co.length)}) se vendieron por menos de lo que costaron.`);
-    if (porClub.length > 1) {
-      const a = porClub[0], z = porClub[porClub.length - 1];
-      L.push(`El club más dependiente de la cantera es <strong>${esc(a.c)}</strong> (${esc(a.l)}): ${pct(a.share)} de sus ingresos por ventas. El menos dependiente es <strong>${esc(z.c)}</strong> (${esc(z.l)}), con ${pct(z.share)}.`);
+    L.push(`Rentabilidad: cantera <strong>${fmt(media(ca.map((r) => r.rentabilidad)))}</strong> de media por venta (sin costo de adquisición) vs. comprados <strong>${fmt(media(rentCoConocida))}</strong> entre los ${rentCoConocida.length} de ${rco.n} con costo de compra conocido. De esos, ${perdida} (${pct(perdida / rentCoConocida.length)}) se vendieron por menos de lo que costaron.`);
+    if (porLiga.length > 1) {
+      const a = porLiga[0], z = porLiga[porLiga.length - 1];
+      L.push(`La liga más dependiente de la cantera es <strong>${esc(a.l)}</strong>: ${pct(a.share)} de sus ingresos por ventas. La menos dependiente es <strong>${esc(z.l)}</strong>, con ${pct(z.share)}.`);
+    }
+    if (porClub.length) {
+      const top = porClub[0];
+      L.push(`Entre los clubes con al menos ${MIN_VENTAS_CLUB} ventas, el más dependiente de su cantera es <strong>${esc(top.c)}</strong> (${esc(top.liga)}): ${pct(top.share)} de sus ingresos vienen de jugadores propios.`);
     }
     if (regCa && regCo) L.push(`Por cada año extra en el club, el fee de venta varía en promedio <strong>${signo(regCa.b)}</strong> para la cantera (R² ${regCa.r2.toFixed(2)}) y <strong>${signo(regCo.b)}</strong> para los comprados (R² ${regCo.r2.toFixed(2)}).`);
     $("#hechos-lista").innerHTML = L.map((x) => `<li>${x}</li>`).join("");
@@ -201,16 +232,16 @@
     const serie = (g) => anios.map((a) => suma(rows.filter((r) => r.grupo === g && r.temporada_venta === a).map((r) => r.fee_venta)));
     const cuenta = (g) => anios.map((a) => rows.filter((r) => r.grupo === g && r.temporada_venta === a).length);
 
-    const clubes = clubesUnicos().filter(([c]) => estado.clubes.has(c));
-    const grupos = clubes.map(([c]) => rows.filter((r) => r.club_vendedor === c));
-    const etiquetas = clubes.map(([c, l]) => [c.length > 18 ? c.slice(0, 17) + "…" : c, l]);
-    if (clubes.length > 1) { grupos.push(rows); etiquetas.push(["Total", "selección"]); }
+    const ligas = ligasUnicas().filter((l) => estado.ligas.has(l));
+    const grupos = ligas.map((l) => rows.filter((r) => r.liga === l));
+    const etiquetas = ligas.map((l) => [l, ""]);
+    if (ligas.length > 1) { grupos.push(rows); etiquetas.push(["Total", "selección"]); }
     const stats = GRUPOS.map((g) => grupos.map((rs) => resumen(porGrupo(rs, g))));
 
     const ca = porGrupo(rows, "cantera"), co = porGrupo(rows, "comprado");
     return {
       evolucion: { anios, cantera: serie("cantera"), comprado: serie("comprado"), n: [cuenta("cantera"), cuenta("comprado")] },
-      promedio: { etiquetas, stats, nombres: etiquetas.map((e) => e.join(" ")) },
+      promedio: { etiquetas, stats, nombres: etiquetas.map((e) => e.filter(Boolean).join(" ")) },
       dispersion: { cantera: ca, comprado: co, regCantera: regresion(ca), regComprado: regresion(co) },
     };
   }
@@ -231,7 +262,7 @@
     const p = d.promedio;
     const ult = p.stats[0].length - 1;
     $("#d-promedio").textContent = `En la selección, el fee promedio de venta es ${fmt(p.stats[0][ult].prom)} para la cantera (${p.stats[0][ult].n} ventas) y ${fmt(p.stats[1][ult].prom)} para los comprados (${p.stats[1][ult].n} ventas).`;
-    $("#t-promedio").innerHTML = tabla(["Club", "Cantera: prom.", "mediana", "n", "Comprados: prom.", "mediana", "n"],
+    $("#t-promedio").innerHTML = tabla(["Liga", "Cantera: prom.", "mediana", "n", "Comprados: prom.", "mediana", "n"],
       p.nombres.map((nm, i) => [esc(nm), fmt(p.stats[0][i].prom), fmt(p.stats[0][i].med), p.stats[0][i].n, fmt(p.stats[1][i].prom), fmt(p.stats[1][i].med), p.stats[1][i].n]));
 
     const s = d.dispersion;
