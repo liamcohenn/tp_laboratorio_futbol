@@ -118,13 +118,60 @@
     return { type: "scatter", data: { datasets: ds }, options: o };
   }
 
-  const builders = { evolucion, promedio, dispersion };
-  const ids = { evolucion: "g-evolucion", promedio: "g-promedio", dispersion: "g-dispersion" };
+  const marcador = {
+    id: "marcador",
+    afterDatasetsDraw(chart, args, opts) {
+      if (!opts || opts.indice == null || opts.indice < 0) return;
+      const x = chart.scales.x.getPixelForValue(opts.indice), { top, bottom } = chart.chartArea, ctx = chart.ctx;
+      ctx.save();
+      ctx.strokeStyle = opts.color; ctx.globalAlpha = .55; ctx.lineWidth = 1.5;
+      ctx.beginPath(); ctx.moveTo(x, top); ctx.lineTo(x, bottom); ctx.stroke();
+      ctx.restore();
+    },
+  };
 
+  // Simulador: mediana del fee de venta por edad (ventana ±1 año), con una línea vertical en la edad elegida.
+  function edad(d, p) {
+    const o = base(p);
+    o.interaction = { mode: "index", intersect: false };
+    o.scales.x = eje(p, "Edad al momento de la venta (años)", { grid: { display: false } });
+    o.scales.y = eje(p, "Fee de venta típico — mediana (M€)", { beginAtZero: true, ticks: { color: p.t3, callback: fmtEje } });
+    o.plugins.tooltip.callbacks = {
+      title: (cs) => `${cs[0].label} años (ventas de ${+cs[0].label - 1} a ${+cs[0].label + 1})`,
+      label: (c) => {
+        const s = d[c.dataset.key][c.dataIndex];
+        return ` ${c.dataset.label}: mediana ${fmt(s.med)} · ${s.n} ventas`;
+      },
+    };
+    const serie = (label, key, color) => {
+      const activo = d.grupo === key;
+      return {
+        label, key, data: d[key].map((s) => s.med), spanGaps: false,
+        borderColor: activo ? color : alpha(color, .35), backgroundColor: alpha(color, activo ? .12 : 0),
+        fill: activo, borderWidth: activo ? 3 : 2, tension: .3,
+        pointRadius: d.edades.map((e) => (activo && e === d.sel ? 7 : activo ? 3 : 0)),
+        pointHoverRadius: 6, pointBackgroundColor: color, pointBorderColor: p.surface, pointBorderWidth: 2,
+        order: activo ? 0 : 1,
+      };
+    };
+    // La posición y el color del marcador viajan por las opciones, que sí se actualizan en cada update().
+    o.plugins.marcador = { indice: d.edades.indexOf(d.sel), color: p.t1 };
+    return {
+      type: "line",
+      data: { labels: d.edades, datasets: [serie("Cantera", "cantera", p.cantera), serie("Comprados", "comprado", p.comprado)] },
+      options: o,
+      plugins: [marcador],
+    };
+  }
+
+  const builders = { evolucion, promedio, dispersion, edad };
+  const ids = { evolucion: "g-evolucion", promedio: "g-promedio", dispersion: "g-dispersion", edad: "g-edad" };
+
+  // Recibe solo los gráficos que cambiaron (los 3 principales o el del simulador) y guarda todo para retematizar.
   function dibujar(datos) {
-    ultimo = datos;
+    ultimo = Object.assign(ultimo || {}, datos);
     const p = paleta();
-    for (const k of Object.keys(builders)) {
+    for (const k of Object.keys(datos).filter((k) => builders[k])) {
       const cfg = builders[k](datos[k], p);
       if (charts[k]) {
         charts[k].data = cfg.data;

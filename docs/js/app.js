@@ -87,6 +87,7 @@
       const o = {
         jugador: String(r.jugador || "").trim(), club_vendedor: String(r.club_vendedor || "").trim(),
         club_comprador: String(r.club_comprador || "").trim(), liga: nombreLiga(r.liga),
+        liga_cod: String(r.liga || "").trim().toUpperCase(),
         temporada_venta: parseInt(r.temporada_venta, 10), grupo: g, fee_venta: fv, fee_compra: fc,
         anios_en_club: num(r.anios_en_club), edad_venta: num(r.edad_venta),
       };
@@ -272,28 +273,83 @@
       [["Cantera", s.regCantera], ["Comprados", s.regComprado]].map(([g, r]) => r ? [g, r.a.toFixed(2), r.b.toFixed(2), r.r2.toFixed(2), r.n] : [g, "—", "—", "—", "—"]));
   }
 
-  /* ---------- Simulador ---------- */
+  /* ---------- Aclaración de la rentabilidad de cantera (ícono "?") ---------- */
+  // La rentabilidad de un canterano es el fee de venta completo: el costo de formarlo no figura en
+  // Transfermarkt, así que se toma como 0. El ícono lo aclara al lado de cada cifra.
+  const info = (texto, etiqueta = "Qué incluye esta rentabilidad") =>
+    `<button type="button" class="info" aria-label="${esc(etiqueta)}" data-tip="${esc(texto)}">?</button>`;
+  const TIP_CANTERA_GENERAL = "Para la cantera, la rentabilidad es el fee de venta completo: el costo de adquisición se toma como 0 porque Transfermarkt no registra lo que el club gastó en formar al jugador (divisiones juveniles, sueldos, viajes, infraestructura). La rentabilidad real es algo menor, pero ese costo suele ser chico al lado del fee.";
+  const tipCantera = (r) => `Los ${fmt(r.fee_venta)} son lo que pagó ${r.club_comprador || "el club comprador"} por ${r.jugador}: el fee de venta completo. Como salió de las inferiores de ${r.club_vendedor}, el costo de adquisición se toma como 0, porque Transfermarkt no registra lo que el club gastó en formarlo (divisiones juveniles, sueldos, viajes, infraestructura). La rentabilidad real es algo menor, pero ese costo suele ser chico al lado del fee.`;
+
+  /* ---------- Simulador por edad de venta ---------- */
+  // Reemplaza al simulador lineal por años en el club, que extrapolaba precios crecientes sin techo.
+  // Acá no hay modelo: para cada edad E se toman las ventas reales con edad entre E−1 y E+1 y se
+  // muestra su mediana. Así la curva sube y baja como en la realidad (el valor cae después del pico).
+  const EDAD_MIN = 17, EDAD_MAX = 34, MIN_N_CURVA = 10;
+  function cuantil(a, q) {
+    if (!a.length) return NaN;
+    const s = [...a].sort((x, y) => x - y), pos = (s.length - 1) * q, i = Math.floor(pos);
+    return s[i] + (s[Math.min(i + 1, s.length - 1)] - s[i]) * (pos - i);
+  }
+  const ventana = (rows, e) => rows.filter((r) => {
+    const ed = Math.floor(r.edad_venta);
+    return !isNaN(ed) && ed >= e - 1 && ed <= e + 1;
+  });
+  function curvaEdad(rows) {
+    const edades = [];
+    for (let e = EDAD_MIN; e <= EDAD_MAX; e++) edades.push(e);
+    const serie = (g) => edades.map((e) => {
+      const v = ventana(porGrupo(rows, g), e);
+      return { n: v.length, med: v.length >= MIN_N_CURVA ? mediana(v.map((r) => r.fee_venta)) : null };
+    });
+    return { edades, cantera: serie("cantera"), comprado: serie("comprado") };
+  }
+  const n1 = (v) => v.toLocaleString("es-AR", { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+
   function simulador(rows) {
     const g = document.querySelector('input[name="sim-grupo"]:checked').value;
-    const x = +$("#sim-anios").value;
-    $("#sim-anios-out").textContent = x.toLocaleString("es-AR", { minimumFractionDigits: 1 });
-    const reg = regresion(porGrupo(rows, g));
-    const aviso = $("#sim-aviso");
-    if (!reg) {
-      $("#sim-valor").textContent = "—"; $("#sim-pendiente").textContent = "—"; $("#sim-r2").textContent = "—";
-      aviso.textContent = "Hay muy pocas ventas de este grupo con los filtros actuales para ajustar una regresión (se necesitan al menos 3).";
+    const e = +$("#sim-edad").value;
+    $("#sim-edad-out").textContent = e;
+    const curva = curvaEdad(rows);
+    Graficos.dibujar({ edad: Object.assign({}, curva, { sel: e, grupo: g }) });
+
+    const v = ventana(porGrupo(rows, g), e);
+    const fees = v.map((r) => r.fee_venta);
+    const aviso = $("#sim-aviso"), frase = $("#sim-frase");
+    if (g === "cantera") $("#sim-rent-lbl").innerHTML = `Rentabilidad típica ${info(TIP_CANTERA_GENERAL)}`;
+    else $("#sim-rent-lbl").textContent = "Rentabilidad típica · % con ganancia";
+    if (!v.length) {
+      ["#sim-valor", "#sim-rango", "#sim-rent", "#sim-n"].forEach((k) => ($(k).textContent = "—"));
+      frase.textContent = "";
+      aviso.textContent = "No hay ventas de este grupo con esa edad en la selección actual. Probá con otra edad o con más ligas.";
       return;
     }
-    const y = reg.a + reg.b * x;
-    $("#sim-valor").textContent = y < 0 ? "≈ 0 M€" : fmt(y);
-    $("#sim-pendiente").textContent = signo(reg.b);
-    $("#sim-r2").textContent = `${reg.r2.toFixed(2)} · ${reg.n}`;
-    const av = [];
-    if (x < reg.xmin || x > reg.xmax) av.push(`${x} años está fuera del rango observado (${reg.xmin}–${reg.xmax}): es una extrapolación.`);
-    if (y < 0) av.push("La recta da un valor negativo en este punto, señal de que el modelo lineal no sirve en este rango.");
-    if (reg.n < 10) av.push(`La estimación se basa en solo ${reg.n} ventas.`);
-    if (reg.r2 < 0.1) av.push(`R² de ${reg.r2.toFixed(2)}: los años en el club explican muy poco de la variación del fee.`);
-    aviso.textContent = av.join(" ");
+    const med = mediana(fees);
+    $("#sim-valor").textContent = fmt(med);
+    $("#sim-rango").textContent = `${n1(cuantil(fees, 0.25))} – ${n1(cuantil(fees, 0.75))} M€`;
+    $("#sim-n").textContent = v.length.toLocaleString("es-AR");
+    if (g === "cantera") {
+      $("#sim-rent").textContent = fmt(med);
+    } else {
+      const rc = v.map((r) => r.rentabilidad).filter((x) => !isNaN(x));
+      const gan = rc.filter((x) => x > 0).length;
+      $("#sim-rent").textContent = rc.length ? `${signo(mediana(rc))} · ${pct(gan / rc.length)}` : "—";
+    }
+
+    // Edad pico (mediana más alta) del grupo, para ubicar la edad elegida respecto de ella.
+    const serie = curva[g];
+    let pico = -1;
+    serie.forEach((p, i) => { if (p.med != null && (pico < 0 || p.med > serie[pico].med)) pico = i; });
+    const nombre = g === "cantera" ? "de cantera" : "comprado";
+    let txt = `Un jugador ${nombre} vendido con ${e - 1} a ${e + 1} años se vendió típicamente por ${fmt(med)} (mediana de ${v.length} ventas).`;
+    if (pico >= 0) {
+      const ep = curva.edades[pico], mp = serie[pico].med;
+      txt += ` La mediana más alta de este grupo está en los ${ep} años (${fmt(mp)}).`;
+      if (e > ep && med < mp) txt += ` A esta edad el precio típico ya está ${pct(1 - med / mp)} por debajo del pico.`;
+      else if (e < ep) txt += " A esta edad el jugador todavía no llegó a su pico de valor.";
+    }
+    frase.textContent = txt;
+    aviso.textContent = v.length < MIN_N_CURVA ? `Solo ${v.length} ventas en esta ventana: el dato es poco confiable.` : "";
   }
 
   /* ---------- Ranking ---------- */
@@ -306,18 +362,29 @@
       <td class="col-club">${esc(r.club_vendedor)}</td>
       <td class="num">${r.temporada_venta}</td>
       <td class="num">${r.anios_en_club.toLocaleString("es-AR")}</td>
-      <td class="num"><span class="rk-barra"><i style="width:${Math.max(2, (r.rentabilidad / max) * 80)}px" aria-hidden="true"></i>${fmt(r.rentabilidad)}</span></td>
+      <td class="num"><span class="rk-barra"><i style="width:${Math.max(2, (r.rentabilidad / max) * 80)}px" aria-hidden="true"></i>${fmt(r.rentabilidad)}${info(tipCantera(r))}</span></td>
     </tr>`).join("") : `<tr><td colspan="6" class="vacio">No hay ventas de cantera con estos filtros.</td></tr>`;
   }
 
   /* ---------- Cabeza a cabeza ---------- */
+  // Solo las 5 ventas más caras (un jugador una vez por liga) de las ligas más fuertes del dataset
+  // —Serie A y Bundesliga no están— más Argentina. Con las 5.280 ventas el desplegable era inmanejable.
+  const LIGAS_H2H = ["GB1", "ES1", "FR1", "PO1", "NL1", "ARG1"];
+  const POR_LIGA_H2H = 5;
   function armarH2H() {
-    const porClub = clubesUnicos().map(([c, l]) => {
-      const rows = TODOS.filter((r) => r.club_vendedor === c).sort((a, b) => a.jugador.localeCompare(b.jugador));
-      return `<optgroup label="${esc(c)} (${esc(l)})">${rows.map((r) => `<option value="${r.id}">${esc(r.jugador)} · ${r.temporada_venta}</option>`).join("")}</optgroup>`;
-    }).join("");
-    $("#h2h-a").innerHTML = porClub; $("#h2h-b").innerHTML = porClub;
-    const mejor = (g, k) => porGrupo(TODOS, g).sort((a, b) => b[k] - a[k])[0];
+    const grupos = LIGAS_H2H.map((cod) => {
+      const vistos = new Set();
+      const top = TODOS.filter((r) => r.liga_cod === cod)
+        .sort((a, b) => b.fee_venta - a.fee_venta)
+        .filter((r) => !vistos.has(r.jugador) && vistos.add(r.jugador))
+        .slice(0, POR_LIGA_H2H);
+      return { liga: nombreLiga(cod), top };
+    }).filter((x) => x.top.length);
+    const html = grupos.map(({ liga, top }) => `<optgroup label="${esc(liga)}">${top.map((r) =>
+      `<option value="${r.id}">${esc(r.jugador)} · ${esc(r.club_vendedor)} → ${esc(r.club_comprador || "s/d")} · ${fmt(r.fee_venta)}</option>`).join("")}</optgroup>`).join("");
+    $("#h2h-a").innerHTML = html; $("#h2h-b").innerHTML = html;
+    const opciones = grupos.flatMap((x) => x.top);
+    const mejor = (g, k) => opciones.filter((r) => r.grupo === g).sort((a, b) => b[k] - a[k])[0];
     const a = mejor("cantera", "rentabilidad"), b = mejor("comprado", "fee_venta");
     if (a) $("#h2h-a").value = a.id;
     if (b) $("#h2h-b").value = b.id;
@@ -333,7 +400,7 @@
     const metricas = [
       ["Fee de venta", "fee_venta", fmt, true],
       ["Fee de compra", "fee_compra", fmt, null],
-      ["Rentabilidad", "rentabilidad", fmt, true],
+      ["Rentabilidad", "rentabilidad", (v, r) => fmt(v) + (r.grupo === "cantera" ? info(tipCantera(r)) : ""), true],
       ["Años en el club", "anios_en_club", (v) => v.toLocaleString("es-AR"), null],
       ["Edad a la venta", "edad_venta", (v) => isNaN(v) ? "—" : v, null],
       ["Temporada", "temporada_venta", (v) => v, null],
@@ -345,9 +412,9 @@
       const barra = (v) => mejorMayor !== null && !isNaN(v) ? `<i style="width:${Math.max(2, (Math.max(v, 0) / mx) * 70)}px" aria-hidden="true"></i>` : "";
       const gA = comparable && va > vb, gB = comparable && vb > va;
       return `<div class="h2h-fila">
-        <div class="h2h-lado a${gA ? " gana" : ""}">${f(va)}${barra(va)}</div>
+        <div class="h2h-lado a${gA ? " gana" : ""}">${f(va, A)}${barra(va)}</div>
         <div class="met">${lbl}</div>
-        <div class="h2h-lado b${gB ? " gana" : ""}">${barra(vb)}${f(vb)}</div>
+        <div class="h2h-lado b${gB ? " gana" : ""}">${barra(vb)}${f(vb, B)}</div>
       </div>`;
     }).join("");
     $("#h2h-cuerpo").innerHTML = `<div class="h2h-cab"><div><strong>${esc(A.jugador)}</strong>${tag(A)}</div><div><strong>${esc(B.jugador)}</strong>${tag(B)}</div></div>${filas}`;
@@ -369,9 +436,7 @@
     armarFiltros();
     hero();
     hechos();
-    const maxAnios = Math.ceil(Math.max(...TODOS.map((r) => r.anios_en_club)));
-    $("#sim-anios").max = Math.max(1, maxAnios);
-    $("#sim-anios").addEventListener("input", () => simulador(filtrados()));
+    $("#sim-edad").addEventListener("input", () => simulador(filtrados()));
     document.querySelectorAll('input[name="sim-grupo"]').forEach((i) => i.addEventListener("change", () => simulador(filtrados())));
     armarH2H();
     actualizar();
@@ -392,6 +457,45 @@
   });
   mqClaro.addEventListener("change", () => { if (!document.documentElement.dataset.theme) { etiquetaTema(); Graficos.retema(); } });
   etiquetaTema();
+
+  /* ---------- Paneles "Cómo se lee" ---------- */
+  document.querySelectorAll(".btn-explica").forEach((b) => b.addEventListener("click", () => {
+    const panel = document.getElementById(b.getAttribute("aria-controls"));
+    const abrir = b.getAttribute("aria-expanded") !== "true";
+    b.setAttribute("aria-expanded", abrir);
+    panel.hidden = !abrir;
+  }));
+
+  /* ---------- Tooltip de los íconos "?" ----------
+     Un solo globo con position: fixed, para que no lo recorten las tablas con scroll horizontal. */
+  const tip = document.createElement("div");
+  tip.className = "tip"; tip.id = "tip"; tip.setAttribute("role", "tooltip"); tip.hidden = true;
+  document.body.appendChild(tip);
+  let tipAncla = null;
+  function mostrarTip(el) {
+    tipAncla = el;
+    tip.textContent = el.dataset.tip;
+    tip.hidden = false;
+    el.setAttribute("aria-describedby", "tip");
+    const r = el.getBoundingClientRect(), w = tip.offsetWidth, h = tip.offsetHeight;
+    const x = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 8));
+    let y = r.top - h - 12, lado = "arriba";
+    if (y < 72) { y = r.bottom + 12; lado = "abajo"; }
+    tip.style.left = x + "px"; tip.style.top = y + "px";
+    tip.dataset.lado = lado;
+    tip.style.setProperty("--flecha", (r.left + r.width / 2 - x) + "px");
+  }
+  function ocultarTip() {
+    if (tipAncla) tipAncla.removeAttribute("aria-describedby");
+    tipAncla = null; tip.hidden = true;
+  }
+  document.addEventListener("pointerover", (e) => { const el = e.target.closest(".info"); if (el && el !== tipAncla) mostrarTip(el); });
+  document.addEventListener("pointerout", (e) => { const el = e.target.closest(".info"); if (el && !el.contains(e.relatedTarget)) ocultarTip(); });
+  document.addEventListener("focusin", (e) => { const el = e.target.closest(".info"); if (el) mostrarTip(el); });
+  document.addEventListener("focusout", (e) => { if (e.target.closest(".info")) ocultarTip(); });
+  document.addEventListener("click", (e) => { const el = e.target.closest(".info"); if (el) mostrarTip(el); else ocultarTip(); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape") ocultarTip(); });
+  window.addEventListener("scroll", ocultarTip, { passive: true });
 
   /* ---------- Scroll: revelado, sección activa y progreso ---------- */
   const io = new IntersectionObserver((es) => es.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); } }), { threshold: 0.12 });

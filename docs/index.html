@@ -6,7 +6,7 @@
   Asistencia de IA (para la reflexión metodológica del informe):
   - Código HTML/CSS/JS generado por Claude Opus 5.5 (Anthropic, model id: claude-opus-5-5),
     usado a través de Claude Code (extensión de VS Code), el 28/10/2026.
-  - Prompt: pedido de un sitio estático para GitHub Pages con los 3 gráficos del notebook
+  - Prompt (28/10): pedido de un sitio estático para GitHub Pages con los 3 gráficos del notebook
     interactivos, metodología, resultados, simulador de rentabilidad, ranking y comparador,
     con la regla de que todos los números se calculen desde el CSV exportado por el notebook.
   - Paleta de colores validada con un script de chequeo de daltonismo/contraste (dataviz skill).
@@ -17,6 +17,11 @@
     llegada + fee, en vez de nombres de equipos juveniles). Renzo Bianco actualizó el sitio
     el 03/11/2026 para ese dataset ampliado: filtros por liga (antes por club, inmanejable con
     ~235), y metodología, interpretaciones y conclusiones recalculadas con los números reales.
+    El 05/11/2026 Renzo Bianco pidió a Claude (mismo modelo) estos cambios: botón "Cómo se lee" con
+    lectura y fórmulas en cada gráfico; ícono "?" que aclara que la rentabilidad de la cantera es el
+    fee completo porque no se conoce el costo de formación; reemplazo del simulador lineal por años
+    en el club (daba precios crecientes sin techo) por uno empírico por edad de venta (mediana con
+    ventana ±1 año); y cabeza a cabeza acotado a 5 ventas por liga en 6 ligas.
     Falta revisión cruzada del resto del grupo antes de la entrega.
 
   Datos: se leen de data/ventas.csv. Si no existe, se usa data/ventas_MUESTRA.csv (datos
@@ -151,11 +156,37 @@
       </div>
 
       <article class="grafico reveal">
-        <header>
-          <p class="g-num">Gráfico 1 · Evolución</p>
-          <h3>Ingresos por ventas por temporada</h3>
-          <p class="g-sub">Suma de fees de venta (M€) por año, por grupo.</p>
+        <header class="g-cab">
+          <div>
+            <p class="g-num">Gráfico 1 · Evolución</p>
+            <h3>Ingresos por ventas por temporada</h3>
+            <p class="g-sub">Suma de fees de venta (M€) por año, por grupo.</p>
+          </div>
+          <button type="button" class="btn-explica" aria-expanded="false" aria-controls="x-evolucion"><span class="btn-explica-ico" aria-hidden="true">?</span>Cómo se lee</button>
         </header>
+        <div class="explica" id="x-evolucion" hidden>
+          <div class="explica-col">
+            <h4>Qué dice</h4>
+            <p>Cuánta plata entró por ventas de jugadores en cada temporada, separando la que vino de jugadores de cantera (naranja) de la que vino de jugadores comprados (azul).</p>
+            <h4>Cómo se lee</h4>
+            <ul>
+              <li><strong>Eje X:</strong> año en que se hizo la venta. <strong>Eje Y:</strong> total recaudado ese año, en millones de euros.</li>
+              <li>Cada punto es la <em>suma</em> de todas las ventas de ese grupo en ese año (no es acumulado: cada año arranca de cero).</li>
+              <li>En un mismo año, la línea más alta es el grupo que más recaudó. La distancia entre las dos líneas muestra cuánto más.</li>
+              <li>Pasando el mouse se ve el monto y cuántas ventas lo forman. Un año alto con pocas ventas suele ser una venta gigante aislada.</li>
+              <li>Ojo: que las dos líneas suban con los años no quiere decir que el negocio mejoró; también sube la inflación del mercado de pases y hay más ventas registradas en los años recientes.</li>
+            </ul>
+          </div>
+          <div class="explica-col">
+            <h4>Fórmulas</h4>
+            <p class="eq">Ingresos<sub>g,t</sub> = Σ fee_venta<sub>i</sub></p>
+            <p class="eq-nota">sumando todas las ventas <em>i</em> del grupo <em>g</em> (cantera o comprado) hechas en la temporada <em>t</em>.</p>
+            <p class="eq">Peso cantera = Ingresos<sub>cantera</sub> ÷ (Ingresos<sub>cantera</sub> + Ingresos<sub>comprado</sub>)</p>
+            <p class="eq-nota">Es el porcentaje que aparece arriba de todo ("de los ingresos por ventas viene de cantera"), calculado sobre todo el período.</p>
+            <h4>Para explicarlo en una frase</h4>
+            <p>"Cada año los clubes recaudan más por ventas, pero la porción que viene de la cantera se mantiene en torno a un cuarto del total."</p>
+          </div>
+        </div>
         <div class="leyenda" aria-hidden="true"><span><i class="sw sw-cantera"></i>Cantera</span><span><i class="sw sw-comprado"></i>Comprados</span></div>
         <div class="lienzo"><canvas id="g-evolucion" role="img" aria-describedby="d-evolucion"></canvas></div>
         <p class="g-desc" id="d-evolucion"></p>
@@ -164,11 +195,37 @@
       </article>
 
       <article class="grafico reveal">
-        <header>
-          <p class="g-num">Gráfico 2 · Comparación</p>
-          <h3>Fee promedio de venta por liga y grupo</h3>
-          <p class="g-sub">Promedio en M€. El tooltip muestra la mediana y la cantidad de ventas.</p>
+        <header class="g-cab">
+          <div>
+            <p class="g-num">Gráfico 2 · Comparación</p>
+            <h3>Fee promedio de venta por liga y grupo</h3>
+            <p class="g-sub">Promedio en M€. El tooltip muestra la mediana y la cantidad de ventas.</p>
+          </div>
+          <button type="button" class="btn-explica" aria-expanded="false" aria-controls="x-promedio"><span class="btn-explica-ico" aria-hidden="true">?</span>Cómo se lee</button>
         </header>
+        <div class="explica" id="x-promedio" hidden>
+          <div class="explica-col">
+            <h4>Qué dice</h4>
+            <p>Por cuánto se vende, en promedio, un jugador de cantera y uno comprado en cada liga. Sirve para ver en qué ligas la cantera "vale más" que lo que se compra.</p>
+            <h4>Cómo se lee</h4>
+            <ul>
+              <li>Cada liga tiene dos barras: naranja = cantera, azul = comprados. La altura es el fee promedio de una venta, en M€.</li>
+              <li>Si la naranja es más alta, en esa liga los canteranos se venden más caros que los comprados (pasa en Argentina, Portugal y México).</li>
+              <li>La última pareja ("Total selección") junta todas las ligas que estén filtradas.</li>
+              <li>Pasando el mouse aparece la <strong>mediana</strong> y la cantidad de ventas. Si el promedio es mucho más alto que la mediana, hay unas pocas ventas enormes que tiran el promedio para arriba (por ejemplo, Mbappé en Francia).</li>
+              <li>Una barra hecha con pocas ventas (ver <em>n</em> en la tabla) es poco confiable.</li>
+            </ul>
+          </div>
+          <div class="explica-col">
+            <h4>Fórmulas</h4>
+            <p class="eq">Promedio = (fee<sub>1</sub> + fee<sub>2</sub> + … + fee<sub>n</sub>) ÷ n</p>
+            <p class="eq-nota">con <em>n</em> = cantidad de ventas de ese grupo en esa liga.</p>
+            <p class="eq">Mediana = el valor del medio, tras ordenar los fees de menor a mayor</p>
+            <p class="eq-nota">Si n es par, el promedio de los dos del medio. La mediana no se deja mover por un caso extremo; el promedio sí.</p>
+            <h4>Para explicarlo en una frase</h4>
+            <p>"En general un comprado se vende algo más caro que un canterano, pero en las ligas exportadoras de talento (Argentina, Portugal) pasa al revés."</p>
+          </div>
+        </div>
         <div class="leyenda" aria-hidden="true"><span><i class="sw sw-cantera"></i>Cantera</span><span><i class="sw sw-comprado"></i>Comprados</span></div>
         <div class="lienzo"><canvas id="g-promedio" role="img" aria-describedby="d-promedio"></canvas></div>
         <p class="g-desc" id="d-promedio"></p>
@@ -177,11 +234,40 @@
       </article>
 
       <article class="grafico reveal">
-        <header>
-          <p class="g-num">Gráfico 3 · Relación</p>
-          <h3>Años en el club vs. fee de venta</h3>
-          <p class="g-sub">Cada punto es una venta. Las líneas son la regresión lineal de cada grupo.</p>
+        <header class="g-cab">
+          <div>
+            <p class="g-num">Gráfico 3 · Relación</p>
+            <h3>Años en el club vs. fee de venta</h3>
+            <p class="g-sub">Cada punto es una venta. Las líneas son la regresión lineal de cada grupo.</p>
+          </div>
+          <button type="button" class="btn-explica" aria-expanded="false" aria-controls="x-dispersion"><span class="btn-explica-ico" aria-hidden="true">?</span>Cómo se lee</button>
         </header>
+        <div class="explica" id="x-dispersion" hidden>
+          <div class="explica-col">
+            <h4>Qué dice</h4>
+            <p>Si los jugadores que se quedan más años en el club se venden más caros. La respuesta es: casi no hay relación.</p>
+            <h4>Cómo se lee</h4>
+            <ul>
+              <li>Cada punto es una venta. <strong>Eje X:</strong> años que el jugador estuvo en el club antes de venderse. <strong>Eje Y:</strong> fee de la venta en M€.</li>
+              <li>La línea punteada de cada color es la <strong>recta de regresión</strong>: la recta que mejor resume la nube de puntos de ese grupo.</li>
+              <li>Si la recta sube, más años se asocian a ventas más caras; si es casi plana, los años no dicen nada del precio.</li>
+              <li>La <strong>pendiente b</strong> (ver la tabla) es cuántos M€ sube o baja el fee, en promedio, por cada año extra en el club.</li>
+              <li>El <strong>R²</strong> va de 0 a 1 y dice qué parte de las diferencias de precio explican los años. R² = 0,04 significa que explican apenas el 4%: el resto depende de otras cosas (calidad, posición, edad, club comprador).</li>
+              <li>Es una asociación, no una causa: no prueba que retener al jugador lo haga valer más.</li>
+            </ul>
+          </div>
+          <div class="explica-col">
+            <h4>Fórmulas (mínimos cuadrados ordinarios)</h4>
+            <p class="eq">Años en el club = (fecha de venta − fecha de llegada o debut) ÷ 365</p>
+            <p class="eq">fee estimado = a + b × años</p>
+            <p class="eq">b = Σ (x<sub>i</sub> − x̄)(y<sub>i</sub> − ȳ) ÷ Σ (x<sub>i</sub> − x̄)²</p>
+            <p class="eq">a = ȳ − b × x̄</p>
+            <p class="eq">R² = [Σ (x<sub>i</sub> − x̄)(y<sub>i</sub> − ȳ)]² ÷ [Σ (x<sub>i</sub> − x̄)² × Σ (y<sub>i</sub> − ȳ)²]</p>
+            <p class="eq-nota">x = años en el club, y = fee de venta, x̄ e ȳ = sus promedios. Se ajusta una recta separada para cada grupo.</p>
+            <h4>Para explicarlo en una frase</h4>
+            <p>"Quedarse más años en el club casi no cambia el precio de venta; lo que sí pesa es la edad del jugador, como muestra el simulador."</p>
+          </div>
+        </div>
         <div class="leyenda" aria-hidden="true"><span><i class="sw sw-cantera"></i>Cantera</span><span><i class="sw sw-comprado"></i>Comprados</span><span><i class="ln"></i>Tendencia lineal</span></div>
         <div class="lienzo lienzo-alto"><canvas id="g-dispersion" role="img" aria-describedby="d-dispersion"></canvas></div>
         <p class="g-desc" id="d-dispersion"></p>
@@ -196,23 +282,57 @@
       <h2>Jugá con los números</h2>
 
       <article class="panel simulador reveal" aria-labelledby="sim-titulo">
-        <h3 id="sim-titulo">Simulador de rentabilidad</h3>
-        <p class="g-sub">Estimación con la recta de regresión <em>fee de venta = a + b × años</em>, ajustada en vivo sobre las ventas filtradas.</p>
+        <header class="g-cab">
+          <div>
+            <h3 id="sim-titulo">Simulador: ¿a qué edad conviene vender?</h3>
+            <p class="g-sub">Elegí una edad y mirá por cuánto se vendieron, en la realidad, los jugadores de esa edad. No es una fórmula inventada: son las ventas reales del dataset, con los filtros aplicados.</p>
+          </div>
+          <button type="button" class="btn-explica" aria-expanded="false" aria-controls="x-sim"><span class="btn-explica-ico" aria-hidden="true">?</span>Cómo se lee</button>
+        </header>
+        <div class="explica" id="x-sim" hidden>
+          <div class="explica-col">
+            <h4>Qué dice</h4>
+            <p>Para una edad de venta elegida, cuál es el precio típico al que se vendieron los jugadores de esa edad y, para los comprados, si el club ganó o perdió plata con ellos.</p>
+            <h4>Cómo se lee</h4>
+            <ul>
+              <li>Mové el control de edad. Se toman todas las ventas de jugadores con esa edad ±1 año (por ejemplo, 22 = vendidos con 21, 22 o 23 años).</li>
+              <li><strong>Fee típico</strong> es la mediana: la mitad de esas ventas fue más cara y la otra mitad más barata.</li>
+              <li><strong>Rango habitual</strong> va del percentil 25 al 75: la mitad central de las ventas cae ahí.</li>
+              <li>El gráfico muestra la mediana para cada edad. La curva llega a un pico en edades jóvenes y después cae: un jugador joven con proyección vale más que uno de 30, al que le quedan menos años de carrera para el club que lo compra.</li>
+              <li>La línea vertical marca la edad elegida. Las edades con menos de 10 ventas no se dibujan porque el dato sería poco confiable.</li>
+            </ul>
+          </div>
+          <div class="explica-col">
+            <h4>Fórmulas</h4>
+            <p class="eq">Ventana(E) = ventas con edad de venta entre E − 1 y E + 1</p>
+            <p class="eq">Fee típico(E) = mediana de fee_venta en la ventana</p>
+            <p class="eq">Rango habitual = [P<sub>25</sub> ; P<sub>75</sub>] de fee_venta</p>
+            <p class="eq">Rentabilidad = fee_venta − fee_compra</p>
+            <p class="eq-nota">Para la cantera, fee_compra = 0 (no se conoce el costo de formación). Para los comprados solo se usan los que tienen fee de compra registrado.</p>
+            <p class="eq">% con ganancia = ventas con rentabilidad &gt; 0 ÷ ventas con costo conocido</p>
+            <h4>Para explicarlo en una frase</h4>
+            <p>"Los jugadores se venden mejor jóvenes: el precio típico de un canterano toca su pico cerca de los 19–20 años y, pasados los 25, cae para los dos grupos. Retener a un jugador demasiado tiempo le resta valor de venta."</p>
+          </div>
+        </div>
         <div class="sim-controles">
           <div class="seg" role="radiogroup" aria-label="Grupo">
             <label><input type="radio" name="sim-grupo" value="cantera" checked><span><i class="sw sw-cantera"></i>Cantera</span></label>
             <label><input type="radio" name="sim-grupo" value="comprado"><span><i class="sw sw-comprado"></i>Comprado</span></label>
           </div>
-          <label class="slider-lbl" for="sim-anios">Años en el club antes de vender: <output id="sim-anios-out">3.0</output></label>
-          <input id="sim-anios" type="range" min="0.5" max="10" step="0.5" value="3">
+          <label class="slider-lbl" for="sim-edad">Edad al momento de la venta: <output id="sim-edad-out">22</output> años</label>
+          <input id="sim-edad" type="range" min="17" max="34" step="1" value="22">
         </div>
         <div class="sim-resultado">
-          <div><span class="sim-label">Fee de venta estimado</span><span class="sim-valor" id="sim-valor">—</span></div>
-          <div><span class="sim-label">Cada año extra suma</span><span class="sim-valor chico" id="sim-pendiente">—</span></div>
-          <div><span class="sim-label">Ajuste (R²) · n</span><span class="sim-valor chico" id="sim-r2">—</span></div>
+          <div><span class="sim-label">Fee típico (mediana)</span><span class="sim-valor" id="sim-valor">—</span></div>
+          <div><span class="sim-label">Rango habitual (P25–P75)</span><span class="sim-valor chico" id="sim-rango">—</span></div>
+          <div><span class="sim-label" id="sim-rent-lbl">Rentabilidad típica</span><span class="sim-valor chico" id="sim-rent">—</span></div>
+          <div><span class="sim-label">Ventas en la ventana</span><span class="sim-valor chico" id="sim-n">—</span></div>
         </div>
+        <p class="sim-frase" id="sim-frase" aria-live="polite"></p>
+        <div class="leyenda" aria-hidden="true"><span><i class="sw sw-cantera"></i>Cantera</span><span><i class="sw sw-comprado"></i>Comprados</span><span><i class="ln ln-solida"></i>Edad elegida</span></div>
+        <div class="lienzo"><canvas id="g-edad" role="img" aria-describedby="sim-frase"></canvas></div>
         <p class="aviso" id="sim-aviso"></p>
-        <p class="nota">Es una tendencia descriptiva y no una predicción causal: la regresión no controla por posición, edad ni calidad del jugador.</p>
+        <p class="nota">Es descriptivo, no una predicción: muestra cómo se vendieron jugadores reales de cada edad, sin controlar por posición, calidad ni club comprador.</p>
       </article>
 
       <article class="panel ranking reveal" aria-labelledby="rk-titulo">
@@ -228,7 +348,7 @@
 
       <article class="panel h2h reveal" aria-labelledby="h2h-titulo">
         <h3 id="h2h-titulo">Cabeza a cabeza</h3>
-        <p class="g-sub">Elegí dos ventas del dataset y compará sus cifras.</p>
+        <p class="g-sub">Elegí dos de las ventas más caras y compará sus cifras: las 5 de mayor fee de cada una de las ligas más fuertes del dataset (Premier League, LaLiga, Ligue 1, Liga Portugal y Eredivisie) más la Liga Profesional Argentina. Serie A y Bundesliga no están en los datos.</p>
         <div class="h2h-selects">
           <label>Jugador A <select id="h2h-a"></select></label>
           <span class="h2h-vs" aria-hidden="true">VS</span>

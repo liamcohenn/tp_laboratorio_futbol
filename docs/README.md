@@ -43,7 +43,7 @@ df_ventas[cols].to_csv("ventas.csv", index=False)   # descargarlo y copiarlo a d
 
 Las filas con `grupo` inválido o con `fee_venta`, `fee_compra`, `anios_en_club` o `temporada_venta` vacíos se descartan, y se avisa en la consola del navegador. Si falta una columna obligatoria, el sitio lo indica en pantalla.
 
-Todos los números del sitio (dato destacado, gráficos, regresión del simulador, ranking, "Lo que dicen los números") se calculan en `js/app.js` a partir de este CSV.
+Todos los números del sitio (dato destacado, gráficos, simulador por edad de venta, regresión del Gráfico 3, ranking, "Lo que dicen los números") se calculan en `js/app.js` a partir de este CSV.
 
 ## Lo que queda por completar a mano
 
