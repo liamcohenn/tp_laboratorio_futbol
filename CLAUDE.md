@@ -50,3 +50,6 @@ Nota: la inscripción del grupo (formulario con dataset y pregunta de investigac
 - `datos/` — dataset o instrucciones para obtenerlo.
 - `informe/` — informe académico en PDF (y link a Overleaf si aplica).
 - `presentacion/` — slides/video/sitio web.
+
+## Convención de commits
+No agregar `Co-Authored-By: Claude ...` en los commits de este repo: cada integrante commitea con su propia cuenta de GitHub y así debe quedar en el historial, sin otro avatar al lado.
