@@ -211,6 +211,7 @@
     }).filter((x) => x.n >= MIN_VENTAS_CLUB && !isNaN(x.share)).sort((a, b) => b.share - a.share);
 
     const L = [];
+    L.push(`Se analizan <strong>${clubesUnicos().length} clubes</strong> de ${ligasUnicas().length} ligas, con ${TODOS.length.toLocaleString("es-AR")} ventas en total.`);
     L.push(`Las ventas de cantera suman <strong>${fmt(rca.total)}</strong> (${pct(rca.total / tot)} de los ingresos) con ${rca.n} ventas (${pct(rca.n / (rca.n + rco.n))} del total). Las de comprados suman <strong>${fmt(rco.total)}</strong> con ${rco.n} ventas.`);
     L.push(`Fee promedio por venta: cantera <strong>${fmt(rca.prom)}</strong> (mediana ${fmt(rca.med)}) vs. comprados <strong>${fmt(rco.prom)}</strong> (mediana ${fmt(rco.med)}).`);
     L.push(`Rentabilidad: cantera <strong>${fmt(media(ca.map((r) => r.rentabilidad)))}</strong> de media por venta (sin costo de adquisición) vs. comprados <strong>${fmt(media(rentCoConocida))}</strong> entre los ${rentCoConocida.length} de ${rco.n} con costo de compra conocido. De esos, ${perdida} (${pct(perdida / rentCoConocida.length)}) se vendieron por menos de lo que costaron.`);
