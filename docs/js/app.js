@@ -13,6 +13,7 @@
     GB1: "Premier League (Inglaterra)", MEX1: "Liga MX (México)", NL1: "Eredivisie (Países Bajos)",
     PO1: "Liga Portugal", SA1: "Saudi Pro League (Arabia Saudita)",
   };
+  const LIGAS_GRAF2 = [["GB1", "Premier"], ["ES1", "LaLiga"], ["FR1", "Ligue 1"], ["PO1", "Portugal"], ["NL1", "Eredivisie"], ["ARG1", "Argentina"]];
   const nombreLiga = (codigo) => LIGA_NOMBRE[String(codigo || "").trim().toUpperCase()] || String(codigo || "").trim();
 
   const $ = (s) => document.querySelector(s);
@@ -233,16 +234,22 @@
     const serie = (g) => anios.map((a) => suma(rows.filter((r) => r.grupo === g && r.temporada_venta === a).map((r) => r.fee_venta)));
     const cuenta = (g) => anios.map((a) => rows.filter((r) => r.grupo === g && r.temporada_venta === a).length);
 
-    const ligas = ligasUnicas().filter((l) => estado.ligas.has(l));
-    const grupos = ligas.map((l) => rows.filter((r) => r.liga === l));
-    const etiquetas = ligas.map((l) => [l, ""]);
-    if (ligas.length > 1) { grupos.push(rows); etiquetas.push(["Total", "selección"]); }
+    // Gráfico 2: solo las 6 ligas principales (con 8 nombres largos el eje X quedaba superpuesto),
+    // con etiquetas cortas. Si el filtro no deja ninguna de las 6, se muestran las elegidas.
+    let ligas = LIGAS_GRAF2.map(([cod]) => nombreLiga(cod)).filter((l) => estado.ligas.has(l));
+    if (!ligas.length) ligas = ligasUnicas().filter((l) => estado.ligas.has(l));
+    const corto = (l) => (LIGAS_GRAF2.find(([cod]) => nombreLiga(cod) === l) || [, l])[1];
+    const rowsG2 = rows.filter((r) => ligas.includes(r.liga));
+    const grupos = ligas.map((l) => rowsG2.filter((r) => r.liga === l));
+    const etiquetas = ligas.map(corto);
+    const nombresG2 = [...ligas];
+    if (ligas.length > 1) { grupos.push(rowsG2); etiquetas.push("Total"); nombresG2.push("Total (estas ligas)"); }
     const stats = GRUPOS.map((g) => grupos.map((rs) => resumen(porGrupo(rs, g))));
 
     const ca = porGrupo(rows, "cantera"), co = porGrupo(rows, "comprado");
     return {
       evolucion: { anios, cantera: serie("cantera"), comprado: serie("comprado"), n: [cuenta("cantera"), cuenta("comprado")] },
-      promedio: { etiquetas, stats, nombres: etiquetas.map((e) => e.filter(Boolean).join(" ")) },
+      promedio: { etiquetas, stats, nombres: nombresG2 },
       dispersion: { cantera: ca, comprado: co, regCantera: regresion(ca), regComprado: regresion(co) },
     };
   }

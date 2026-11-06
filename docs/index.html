@@ -199,7 +199,7 @@
           <div>
             <p class="g-num">Gráfico 2 · Comparación</p>
             <h3>Fee promedio de venta por liga y grupo</h3>
-            <p class="g-sub">Promedio en M€. El tooltip muestra la mediana y la cantidad de ventas.</p>
+            <p class="g-sub">Promedio en M€, en las 6 ligas principales del dataset. El tooltip muestra la mediana y la cantidad de ventas.</p>
           </div>
           <button type="button" class="btn-explica" aria-expanded="false" aria-controls="x-promedio"><span class="btn-explica-ico" aria-hidden="true">?</span>Cómo se lee</button>
         </header>
@@ -210,8 +210,9 @@
             <h4>Cómo se lee</h4>
             <ul>
               <li>Cada liga tiene dos barras: naranja = cantera, azul = comprados. La altura es el fee promedio de una venta, en M€.</li>
-              <li>Si la naranja es más alta, en esa liga los canteranos se venden más caros que los comprados (pasa en Argentina, Portugal y México).</li>
-              <li>La última pareja ("Total selección") junta todas las ligas que estén filtradas.</li>
+              <li>Si la naranja es más alta, en esa liga los canteranos se venden más caros que los comprados (pasa en Argentina y Portugal).</li>
+              <li>La última pareja ("Total") junta las ligas del gráfico que estén filtradas.</li>
+              <li>Para que el eje quede legible se muestran solo 6 ligas: Premier League, LaLiga, Ligue 1, Liga Portugal, Eredivisie y Argentina. México y Arabia Saudita siguen contando en el resto del sitio.</li>
               <li>Pasando el mouse aparece la <strong>mediana</strong> y la cantidad de ventas. Si el promedio es mucho más alto que la mediana, hay unas pocas ventas enormes que tiran el promedio para arriba (por ejemplo, Mbappé en Francia).</li>
               <li>Una barra hecha con pocas ventas (ver <em>n</em> en la tabla) es poco confiable.</li>
             </ul>
@@ -230,7 +231,7 @@
         <div class="lienzo"><canvas id="g-promedio" role="img" aria-describedby="d-promedio"></canvas></div>
         <p class="g-desc" id="d-promedio"></p>
         <details class="tabla-dato"><summary>Ver datos en tabla</summary><div id="t-promedio"></div></details>
-        <div class="interpretacion"><h4>Interpretación</h4><p>El fee promedio no favorece siempre al mismo grupo: en Premier League, Países Bajos, LaLiga, Francia y Arabia Saudita, un comprado se vende en promedio más caro que un canterano; en Argentina, Portugal y México pasa lo contrario. El caso más marcado es Portugal (cantera ≈€11,0M vs. comprados ≈€6,5M de promedio). En el conjunto de las 8 ligas, el fee promedio es ≈€7,4M para la cantera y ≈€8,7M para los comprados: la cantera se vende, en promedio, más barata — aunque, como muestran las conclusiones, deja mejor margen por no tener costo de adquisición.</p></div>
+        <div class="interpretacion"><h4>Interpretación</h4><p>El fee promedio no favorece siempre al mismo grupo: en Premier League, LaLiga y Francia un comprado se vende en promedio claramente más caro que un canterano, y en la Eredivisie quedan casi iguales; en Argentina y Portugal pasa lo contrario. El caso más marcado es Portugal (cantera ≈€11,0M vs. comprados ≈€6,5M de promedio). En el conjunto de estas 6 ligas, el fee promedio es ≈€7,6M para la cantera y ≈€9,0M para los comprados: la cantera se vende, en promedio, más barata — aunque, como muestran las conclusiones, deja mejor margen por no tener costo de adquisición.</p></div>
       </article>
 
       <article class="grafico reveal">
