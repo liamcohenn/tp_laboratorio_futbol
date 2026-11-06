@@ -367,14 +367,15 @@
   }
 
   /* ---------- Cabeza a cabeza ---------- */
-  // Solo las 5 ventas más caras (un jugador una vez por liga) de las ligas más fuertes del dataset
-  // —Serie A y Bundesliga no están— más Argentina. Con las 5.280 ventas el desplegable era inmanejable.
+  // Cantera (lado A) contra comprados (lado B). Cada desplegable trae las 5 ventas más caras de su
+  // grupo (un jugador una vez por liga) en las ligas más fuertes del dataset —Serie A y Bundesliga
+  // no están— más Argentina. Con las 5.280 ventas el desplegable era inmanejable.
   const LIGAS_H2H = ["GB1", "ES1", "FR1", "PO1", "NL1", "ARG1"];
   const POR_LIGA_H2H = 5;
-  function armarH2H() {
+  function opcionesH2H(grupo) {
     const grupos = LIGAS_H2H.map((cod) => {
       const vistos = new Set();
-      const top = TODOS.filter((r) => r.liga_cod === cod)
+      const top = TODOS.filter((r) => r.liga_cod === cod && r.grupo === grupo)
         .sort((a, b) => b.fee_venta - a.fee_venta)
         .filter((r) => !vistos.has(r.jugador) && vistos.add(r.jugador))
         .slice(0, POR_LIGA_H2H);
@@ -382,12 +383,14 @@
     }).filter((x) => x.top.length);
     const html = grupos.map(({ liga, top }) => `<optgroup label="${esc(liga)}">${top.map((r) =>
       `<option value="${r.id}">${esc(r.jugador)} · ${esc(r.club_vendedor)} → ${esc(r.club_comprador || "s/d")} · ${fmt(r.fee_venta)}</option>`).join("")}</optgroup>`).join("");
-    $("#h2h-a").innerHTML = html; $("#h2h-b").innerHTML = html;
-    const opciones = grupos.flatMap((x) => x.top);
-    const mejor = (g, k) => opciones.filter((r) => r.grupo === g).sort((a, b) => b[k] - a[k])[0];
-    const a = mejor("cantera", "rentabilidad"), b = mejor("comprado", "fee_venta");
-    if (a) $("#h2h-a").value = a.id;
-    if (b) $("#h2h-b").value = b.id;
+    const mejor = grupos.flatMap((x) => x.top).sort((a, b) => b.fee_venta - a.fee_venta)[0];
+    return { html, mejor };
+  }
+  function armarH2H() {
+    const ca = opcionesH2H("cantera"), co = opcionesH2H("comprado");
+    $("#h2h-a").innerHTML = ca.html; $("#h2h-b").innerHTML = co.html;
+    if (ca.mejor) $("#h2h-a").value = ca.mejor.id;
+    if (co.mejor) $("#h2h-b").value = co.mejor.id;
     $("#h2h-a").addEventListener("change", h2h); $("#h2h-b").addEventListener("change", h2h);
     h2h();
   }

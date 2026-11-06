@@ -337,6 +337,8 @@ input[type="range"] { width: 100%; accent-color: var(--accent); height: 28px; }
 /* ============ Cabeza a cabeza ============ */
 .h2h-selects { display: grid; grid-template-columns: 1fr auto 1fr; gap: .75rem; align-items: end; margin-bottom: 1.25rem; }
 .h2h-selects label { display: flex; flex-direction: column; gap: .3rem; font-size: .8rem; color: var(--text-3); min-width: 0; }
+.h2h-lbl { display: inline-flex; align-items: center; gap: .4rem; font-weight: 600; color: var(--text-1); text-transform: uppercase; letter-spacing: .06em; }
+.h2h-selects label:last-child .h2h-lbl { align-self: flex-end; }
 .h2h-vs { font-size: 1.6rem; font-weight: 800; color: var(--accent); padding-bottom: .1rem; }
 .h2h-cab { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-bottom: .75rem; }
 .h2h-cab div { background: var(--surface-2); border: 1px solid var(--line); border-radius: 12px; padding: .8rem 1rem; }
